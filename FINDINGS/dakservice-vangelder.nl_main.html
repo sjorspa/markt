@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Indexation & Robots - Critical for Google Ads -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    
+    <!-- DNS Prefetch & Preconnect - CRITICAL FOR PERFORMANCE -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://storage.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    
+    <!-- Preload LCP hero image with HIGHEST priority - most critical for LCP -->
+    <link rel="preload" as="image" href="/hero-opt.webp" type="image/webp" fetchpriority="high" imagesizes="(max-width: 768px) 100vw, 100vw" imagesrcset="/hero-mobile.webp 768w, /hero-opt.webp 1920w">
+    
+    <!-- Fonts loaded via CSS @font-face with system fallback - NO external requests blocking FCP -->
+    
+    <style>
+      /* ULTRA-MINIMAL Critical CSS - Maximum FCP speed */
+      *{margin:0;padding:0;box-sizing:border-box}
+      body{font-family:system-ui,-apple-system,sans-serif;background:#fff;color:#1a1a2e}
+      #root{min-height:100vh}
+      
+      /* Hero with LCP image */
+      .hero-skeleton{min-height:700px;background:#1a365d url('/hero-opt.webp') center/cover;display:flex;align-items:center;padding:8rem 1rem}
+      .hero-skeleton::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.4)}
+      @media(max-width:768px){.hero-skeleton{background-image:url('/hero-mobile.webp')}}
+      
+      /* Minimal skeleton */
+      .skeleton-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1280px;margin:0 auto}
+      .skeleton-content{max-width:600px;z-index:1}
+      .skeleton-title{height:60px;background:rgba(255,255,255,.3);border-radius:8px;margin-bottom:16px}
+      .skeleton-btn{height:48px;width:160px;background:#ffc800;border-radius:8px;display:inline-block;margin-right:16px}
+      .skeleton-form{background:rgba(255,255,255,.1);border-radius:12px;padding:32px;max-width:400px;margin-left:auto}
+      .skeleton-input{height:44px;background:rgba(255,255,255,.2);border-radius:6px;margin-bottom:12px}
+      @media(max-width:1024px){.skeleton-grid{grid-template-columns:1fr}}
+      
+      /* Navigation */
+      .nav-skeleton{position:sticky;top:0;z-index:50;background:#fff;padding:16px;height:73px}
+      
+      /* Prevent CLS */
+      img,video{max-width:100%;height:auto}
+      .hero-section{min-height:700px}
+      nav{height:73px}
+      
+      /* Hide when React loads */
+      #root:not(:empty) .loading-skeleton{display:none}
+    </style>
+    
+    <title>Dakservice Van Gelder - Professionele Dakdekker Nederland</title>
+    <meta name="description" content="Specialist in dakrenovatie, dakreparatie en dakonderhoud in heel Nederland. Vakkundige dakdekkers met garantie.">
+    <meta name="author" content="Dakservice Van Gelder" />
+    
+    <!-- Google Tag Manager - Delayed until user interaction for better LCP -->
+    <script>
+      // Load GTM only after user interaction OR after 8 seconds (whichever comes first)
+      (function() {
+        var gtmLoaded = false;
+        
+        function loadGTM() {
+          if (gtmLoaded) return;
+          gtmLoaded = true;
+          
+          // Remove all event listeners
+          document.removeEventListener('click', loadGTM);
+          document.removeEventListener('scroll', loadGTM);
+          document.removeEventListener('mousemove', loadGTM);
+          document.removeEventListener('touchstart', loadGTM);
+          document.removeEventListener('keydown', loadGTM);
+          
+          // Load GTM
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-57JXFBMF');
+        }
+        
+        // Load on user interaction (any of these events)
+        document.addEventListener('click', loadGTM, {once: true, passive: true});
+        document.addEventListener('scroll', loadGTM, {once: true, passive: true});
+        document.addEventListener('mousemove', loadGTM, {once: true, passive: true});
+        document.addEventListener('touchstart', loadGTM, {once: true, passive: true});
+        document.addEventListener('keydown', loadGTM, {once: true, passive: true});
+        
+        // Fallback: load after 8 seconds if no interaction
+        setTimeout(loadGTM, 8000);
+      })();
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <link rel="icon" type="image/x-icon" href="https://storage.googleapis.com/gpt-engineer-file-uploads/N6g8C7mqPwOWpgZ0FhzFh1ThaEg1/uploads/1759430157673-logo.png">
+  <script type="module" crossorigin src="/assets/js/index-COuT15vN.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/js/vendor-react-core-BP8_t0zE.js">
+  <link rel="modulepreload" crossorigin href="/assets/js/vendor-react-dom-kl4bciu1.js">
+  <link rel="modulepreload" crossorigin href="/assets/js/vendor-ui-dialog-7k1bLxqA.js">
+  <link rel="modulepreload" crossorigin href="/assets/js/vendor-ui-nav-DqDXK-dQ.js">
+  <link rel="modulepreload" crossorigin href="/assets/js/vendor-icons-B0eW6kNb.js">
+  <link rel="modulepreload" crossorigin href="/assets/js/vendor-query-CBZK-vqL.js">
+  <link rel="modulepreload" crossorigin href="/assets/js/vendor-router-CGYWR7Cc.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-ejkUxRhU.css">
+<script defer src="/~flock.js" data-proxy-url="/~api/analytics"></script><script defer src="/__l5e/events.js" data-artifact-kind="preview_commit_sha" data-artifact-id="35d463b6410b8ed8f010a0eb1d532ee5e751d41b" data-commit-sha="35d463b6410b8ed8f010a0eb1d532ee5e751d41b" data-context-token="v1.eyJwcm9qZWN0X2lkIjoiMDM1ZDkxMzctOGNkMy00NTgwLWFjZGItYmNiZTE1M2Y5Y2RlIiwiYXJ0aWZhY3Rfa2luZCI6InByZXZpZXdfY29tbWl0X3NoYSIsImFydGlmYWN0X2lkIjoiMzVkNDYzYjY0MTBiOGVkOGYwMTBhMGViMWQ1MzJlZTVlNzUxZDQxYiIsImNvbW1pdF9zaGEiOiIzNWQ0NjNiNjQxMGI4ZWQ4ZjAxMGEwZWIxZDUzMmVlNWU3NTFkNDFiIiwiZXhwIjoxNzg0MDUzMzgwfQ.fRFBbsBcuT7XiDJvIZTsH-63ep2yDlvDOoEqi26JjG0"></script><meta property="og:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f7af2e57-608b-4d5f-bca3-36e01a390248/id-preview-35d463b6--035d9137-8cd3-4580-acdb-bcbe153f9cde.lovable.app-1768841711440.png"><meta name="twitter:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f7af2e57-608b-4d5f-bca3-36e01a390248/id-preview-35d463b6--035d9137-8cd3-4580-acdb-bcbe153f9cde.lovable.app-1768841711440.png"></head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-57JXFBMF"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    <!-- SEO content for crawlers without JavaScript -->
+    <noscript>
+      <div style="max-width: 1200px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif;">
+        <header>
+          <h1>Daken die vertrouwen geven - Dakservice Van Gelder</h1>
+        </header>
+        <main>
+          <section>
+            <h2>Professionele Dakdekker in Amsterdam en omgeving</h2>
+            <p>Bent u op zoek naar een vakkundig dakdekkersbedrijf voor het renoveren, onderhouden of repareren van uw dak? Dan bent u bij Dakservice Van Gelder aan het juiste adres. Met meer dan 25 jaar ervaring leveren wij hoogwaardige dakwerkzaamheden door heel Nederland.</p>
+            <p>Wij bieden een vrijblijvend adviesgesprek aan huis en een gratis dakinspectie. Ons team van gecertificeerde vakmannen staat 24/7 voor u klaar, ook bij spoedgevallen zoals daklekkages.</p>
+          </section>
+          
+          <section>
+            <h2>Onze Diensten</h2>
+            <ul>
+              <li><strong>Dakrenovatie:</strong> Complete vernieuwing van uw dak met hoogwaardige materialen en 10 jaar garantie</li>
+              <li><strong>Dakreparatie:</strong> Snelle en effectieve reparatie van daklekkages en beschadigingen</li>
+              <li><strong>Dakonderhoud:</strong> Preventief onderhoud om de levensduur van uw dak te verlengen</li>
+              <li><strong>Bitumen Dakbedekking:</strong> Waterdichte en duurzame oplossing voor platte daken</li>
+              <li><strong>Pannendak:</strong> Plaatsing en renovatie van pannendaken met keramische of betonnen dakpannen</li>
+              <li><strong>Dakkapellen:</strong> Professionele plaatsing en renovatie van dakkapellen</li>
+              <li><strong>Dakisolatie:</strong> Energiebesparende dakisolatie voor optimaal wooncomfort</li>
+              <li><strong>Lood en Zinkwerk:</strong> Vakkundig lood- en zinkwerk voor perfecte afwerking</li>
+            </ul>
+          </section>
+          
+          <section>
+            <h2>Werkgebied</h2>
+            <p>Wij zijn actief in Amsterdam, Den Haag, Rotterdam, Utrecht, Haarlem, Gouda, Zaandam, Almere, Lelystad en omliggende gemeenten. Neem contact met ons op voor een vrijblijvende offerte.</p>
+          </section>
+          
+          <section>
+            <h2>Contact</h2>
+            <p>Telefoon: <a href="tel:0203086537">020 308 6537</a></p>
+            <p>Email: <a href="mailto:info@dakservice-vangelder.nl">info@dakservice-vangelder.nl</a></p>
+            <p>Bereikbaar: Maandag t/m Vrijdag 08:00 - 18:00</p>
+          </section>
+          
+          <section>
+            <h2>Waarom Dakservice Van Gelder?</h2>
+            <ul>
+              <li>Meer dan 25 jaar ervaring in de dakdekkerij</li>
+              <li>Gecertificeerde en VCA erkende vakmannen</li>
+              <li>10 jaar garantie op alle werkzaamheden</li>
+              <li>Erkend leerbedrijf met hoog kwaliteitsniveau</li>
+              <li>Transparante prijzen zonder verborgen kosten</li>
+              <li>24/7 bereikbaar voor spoedreparaties</li>
+              <li>Gratis adviesgesprek en dakinspectie</li>
+            </ul>
+          </section>
+        </main>
+      </div>
+    </noscript>
+    
+    <div id="root">
+      <!-- MINIMAL skeleton for instant FCP -->
+      <div class="loading-skeleton">
+        <div class="nav-skeleton"></div>
+        <div class="hero-skeleton">
+          <div class="skeleton-grid">
+            <div class="skeleton-content">
+              <div class="skeleton-title"></div>
+              <div><div class="skeleton-btn"></div><div class="skeleton-btn" style="background:#25d366"></div></div>
+            </div>
+            <div class="skeleton-form">
+              <div class="skeleton-input"></div>
+              <div class="skeleton-input"></div>
+              <div class="skeleton-input"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
