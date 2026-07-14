@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head itemscope itemtype="https://schema.org/WebSite"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let i;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",i=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")&&this._isValidScriptType(i)?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}_isValidScriptType(e){return!e||""===e||"string"==typeof e&&["text/javascript","text/x-javascript","text/ecmascript","text/jscript","application/javascript","application/x-javascript","application/ecmascript","application/jscript","module"].includes(e.toLowerCase())}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){const n=e[t];Object.defineProperty(e,t,{get:n||function(){},set:n=>{e["rocket"+t]=n}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,i=document.createRange(),r=n.parentElement;let a=e.get(n);void 0===a&&(a=n.nextSibling,e.set(n,a));const o=document.createDocumentFragment();i.setStart(o,0),o.appendChild(i.createContextualFragment(t)),r.insertBefore(o,a)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","touchcancel","touchforcechange","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.loodgietersbedrijfrdl.nl/xmlrpc.php">
+
+<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v28.0 - https://yoast.com/product/yoast-seo-wordpress/ -->
+	<title>Home - RDL | Loodgieters | Vloerverwarming | Dakdekkers</title><link rel="stylesheet" href="https://www.loodgietersbedrijfrdl.nl/wp-content/cache/min/1/45e491fa9bcc26557a5486e4c75e8614.css" media="all" data-minify="1" />
+	<meta name="description" content="Loodgieter Noord-Holland ✓ Lekkage, verstopping, cv of rioolproblemen? ✓ 24 uur bereikbaar, ook voor spoed! ☎ 072 - 7855410" />
+	<link rel="canonical" href="https://www.loodgietersbedrijfrdl.nl/" />
+	<meta property="og:locale" content="nl_NL" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Home - RDL | Loodgieters | Vloerverwarming | Dakdekkers" />
+	<meta property="og:description" content="Loodgieter Noord-Holland ✓ Lekkage, verstopping, cv of rioolproblemen? ✓ 24 uur bereikbaar, ook voor spoed! ☎ 072 - 7855410" />
+	<meta property="og:url" content="https://www.loodgietersbedrijfrdl.nl/" />
+	<meta property="og:site_name" content="RDL | Loodgieters | Vloerverwarming | Dakdekkers" />
+	<meta property="article:publisher" content="https://www.facebook.com/loodgietersbedrijfRDL" />
+	<meta property="article:modified_time" content="2021-12-13T20:07:20+00:00" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https:\/\/schema.org","@graph":[{"@type":"WebPage","@id":"https:\/\/www.loodgietersbedrijfrdl.nl\/","url":"https:\/\/www.loodgietersbedrijfrdl.nl\/","name":"Home - RDL | Loodgieters | Vloerverwarming | Dakdekkers","isPartOf":{"@id":"https:\/\/www.loodgietersbedrijfrdl.nl\/#website"},"about":{"@id":"https:\/\/www.loodgietersbedrijfrdl.nl\/#organization"},"datePublished":"2021-11-09T12:03:43+00:00","dateModified":"2021-12-13T20:07:20+00:00","description":"Loodgieter Noord-Holland ✓ Lekkage, verstopping, cv of rioolproblemen? ✓ 24 uur bereikbaar, ook voor spoed! ☎ 072 - 7855410","breadcrumb":{"@id":"https:\/\/www.loodgietersbedrijfrdl.nl\/#breadcrumb"},"inLanguage":"nl-NL","potentialAction":[{"@type":"ReadAction","target":["https:\/\/www.loodgietersbedrijfrdl.nl\/"]}]},{"@type":"BreadcrumbList","@id":"https:\/\/www.loodgietersbedrijfrdl.nl\/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home"}]},{"@type":"WebSite","@id":"https:\/\/www.loodgietersbedrijfrdl.nl\/#website","url":"https:\/\/www.loodgietersbedrijfrdl.nl\/","name":"RDL | Loodgieters | Vloerverwarming | Dakdekkers","description":"Uw betrouwbare loodgieter aan huis.","publisher":{"@id":"https:\/\/www.loodgietersbedrijfrdl.nl\/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/www.loodgietersbedrijfrdl.nl\/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"nl-NL"},{"@type":"Organization","@id":"https:\/\/www.loodgietersbedrijfrdl.nl\/#organization","name":"RDL Loodgieter Alkmaar","url":"https:\/\/www.loodgietersbedrijfrdl.nl\/","logo":{"@type":"ImageObject","inLanguage":"nl-NL","@id":"https:\/\/www.loodgietersbedrijfrdl.nl\/#\/schema\/logo\/image\/","url":"https:\/\/www.loodgietersbedrijfrdl.nl\/wp-content\/uploads\/2024\/04\/cropped-LOGO2023RDLVloer.png","contentUrl":"https:\/\/www.loodgietersbedrijfrdl.nl\/wp-content\/uploads\/2024\/04\/cropped-LOGO2023RDLVloer.png","width":1100,"height":312,"caption":"RDL Loodgieter Alkmaar"},"image":{"@id":"https:\/\/www.loodgietersbedrijfrdl.nl\/#\/schema\/logo\/image\/"},"sameAs":["https:\/\/www.facebook.com\/loodgietersbedrijfRDL"]}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//maps.googleapis.com' />
+<link rel='dns-prefetch' href='//netdna.bootstrapcdn.com' />
+
+<link rel="alternate" type="application/rss+xml" title="RDL | Loodgieters | Vloerverwarming | Dakdekkers &raquo; feed" href="https://www.loodgietersbedrijfrdl.nl/feed/" />
+<link rel="alternate" type="application/rss+xml" title="RDL | Loodgieters | Vloerverwarming | Dakdekkers &raquo; reacties feed" href="https://www.loodgietersbedrijfrdl.nl/comments/feed/" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+
+
+
+
+
+
+
+
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style*=border-color]){border-style:solid}html :where([style*=border-top-color]){border-top-style:solid}html :where([style*=border-right-color]){border-right-style:solid}html :where([style*=border-bottom-color]){border-bottom-style:solid}html :where([style*=border-left-color]){border-left-style:solid}html :where([style*=border-width]){border-style:solid}html :where([style*=border-top-width]){border-top-style:solid}html :where([style*=border-right-width]){border-right-style:solid}html :where([style*=border-bottom-width]){border-bottom-style:solid}html :where([style*=border-left-width]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="wp-block-list-inline-css">
+ol,ul{box-sizing:border-box}:root :where(.wp-block-list.has-background){padding:1.25em 2.375em}
+/*# sourceURL=https://www.loodgietersbedrijfrdl.nl/wp-includes/blocks/list/style.min.css */
+</style>
+
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+
+
+
+
+
+
+
+<style id="rocket-lazyload-inline-css">
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;cursor:pointer;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:72px;width:72px;left:50%;top:50%;margin-left:-36px;margin-top:-36px;position:absolute;background:url(https://www.loodgietersbedrijfrdl.nl/wp-content/plugins/wp-rocket/assets/img/youtube.png) no-repeat;cursor:pointer}
+/*# sourceURL=rocket-lazyload-inline-css */
+</style>
+<script type="rocketlazyloadscript" id="jquery-core-js" src="https://www.loodgietersbedrijfrdl.nl/wp-includes/js/jquery/jquery.min.js" defer></script>
+<script type="rocketlazyloadscript" id="jquery-migrate-js" src="https://www.loodgietersbedrijfrdl.nl/wp-includes/js/jquery/jquery-migrate.min.js" defer></script>
+<script id="wp-customer-reviews-3-frontend-js-extra">
+var wpcr3Ajax = {"nonce":"f54801354e"};
+//# sourceURL=wp-customer-reviews-3-frontend-js-extra
+</script>
+<script type="rocketlazyloadscript" data-minify="1" id="wp-customer-reviews-3-frontend-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/cache/min/1/wp-content/plugins/wp-customer-reviews/js/wp-customer-reviews.js?ver=1764153149" defer></script>
+<script type="rocketlazyloadscript" data-minify="1" id="easing-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/cache/min/1/wp-content/plugins/cherry-plugin/lib/js/jquery.easing.1.3.js?ver=1764153149" defer></script>
+<script type="rocketlazyloadscript" data-minify="1" id="elastislide-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/cache/min/1/wp-content/plugins/cherry-plugin/lib/js/elasti-carousel/jquery.elastislide.js?ver=1764153149" defer></script>
+<script type="rocketlazyloadscript" id="googlemapapis-js" src="//maps.googleapis.com/maps/api/js?v=3.exp&#038;sensor=false&#038;ver=7.0.1" defer></script>
+<script type="rocketlazyloadscript" id="v4-shims-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/themes/construction-landing-page-pro/js/v4-shims.min.js" defer></script>
+<script id="rich-reviews-js-extra">
+var php_vars = {"excerpt_length":"150","maybe_some_other_stuff":"Probably Not"};
+var translation = {"read_more":"Read More","less":"Less"};
+//# sourceURL=rich-reviews-js-extra
+</script>
+<script type="rocketlazyloadscript" data-minify="1" id="rich-reviews-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/cache/min/1/wp-content/plugins/rich-reviews/js/rich-reviews.js?ver=1764153149" defer></script>
+<link rel="https://api.w.org/" href="https://www.loodgietersbedrijfrdl.nl/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://www.loodgietersbedrijfrdl.nl/wp-json/wp/v2/pages/6348" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.loodgietersbedrijfrdl.nl/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 7.0.1" />
+<link rel='shortlink' href='https://www.loodgietersbedrijfrdl.nl/' />
+<script type="rocketlazyloadscript">readMoreArgs = []</script><script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+				EXPM_VERSION=3.55;EXPM_AJAX_URL='https://www.loodgietersbedrijfrdl.nl/wp-admin/admin-ajax.php';
+			function yrmAddEvent(element, eventName, fn) {
+				if (element.addEventListener)
+					element.addEventListener(eventName, fn, false);
+				else if (element.attachEvent)
+					element.attachEvent('on' + eventName, fn);
+			}
+			</script><link rel="icon" href="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2013/06/cropped-loodgieterspoed-32x32.jpg" sizes="32x32" />
+<link rel="icon" href="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2013/06/cropped-loodgieterspoed-192x192.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2013/06/cropped-loodgieterspoed-180x180.jpg" />
+<meta name="msapplication-TileImage" content="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2013/06/cropped-loodgieterspoed-270x270.jpg" />
+<style type='text/css' media='all'>        :root {
+            --primary-color: #F9963B;
+            --primary-color-rgb: 249, 150, 59;
+            --secondary-color: #0D0804;
+            --secondary-color-rgb: 13, 8, 4;
+            --font-color: #383532;
+            --font-color-rgb: 56, 53, 50;
+            --e-global-color-construction_landing_page_primary_color  : #F9963B;
+            --e-global-color-construction_landing_page_secondary_color: #0D0804;
+            --e-global-color-construction_landing_page_body_color: #383532;
+            --primary-font: Outfit;            
+        }
+                :root {
+            --secondary-font: Big Shoulders Display;  
+        }
+        
+        .theme-style-modern .banner .quote-form:after,
+        .theme-style-modern .promotional-block2 .quote-form:after{
+            background-image: url("data:image/svg+xml,%3Csvg width='143' height='81' viewBox='0 0 143 81' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.86039 80.3231C3.04698 80.1274 3.23389 80.0613 3.40618 80.13C3.59575 80.2054 3.63482 80.0997 3.54723 79.7483C3.48061 79.4811 3.30215 79.2529 3.15055 79.2412C2.71274 79.2077 2.70567 78.7178 3.1361 78.2351C3.35378 77.991 3.50542 77.6852 3.47303 77.5553C3.40056 77.2647 3.0869 77.322 3.0027 77.6415C2.96864 77.7706 2.93471 77.7061 2.9272 77.498C2.91735 77.2302 2.84247 77.1646 2.6709 77.2735C2.53747 77.3582 2.40779 77.3451 2.3827 77.2445C2.35761 77.1438 2.44398 77.0337 2.57486 76.9996C2.73307 76.9583 2.70445 76.9092 2.48854 76.8525C2.21025 76.7795 2.20909 76.7172 2.48012 76.4125C2.6537 76.2174 2.97624 75.9365 3.1966 75.7885C3.42443 75.6356 3.52125 75.4543 3.42111 75.3687C3.29806 75.2636 3.21227 75.2981 3.13668 75.4832C3.05452 75.685 3.00147 75.6713 2.91431 75.4258C2.85145 75.2484 2.76867 75.0178 2.73033 74.9137C2.69196 74.8093 2.58373 74.6848 2.48963 74.6372C2.05966 74.419 2.29817 74.2309 3.12668 74.1351C4.09341 74.0232 4.15646 73.9641 3.6073 73.6854C3.28443 73.5214 3.27265 73.4807 3.5065 73.3323C3.65183 73.2401 3.6978 73.071 3.60864 72.9564C3.51807 72.8401 3.56064 72.7184 3.7047 72.6811C3.90387 72.6293 3.88831 72.5937 3.63683 72.5251C3.35823 72.4492 3.35917 72.4237 3.64394 72.3505C3.85315 72.2967 3.9453 72.1374 3.89174 71.9225C3.84477 71.7342 3.90728 71.4365 4.03063 71.261C4.15398 71.0854 4.19133 70.6868 4.11367 70.3753C4.03597 70.0637 4.05193 69.7889 4.14919 69.7646C4.3851 69.7058 4.70025 68.5731 4.52291 68.4216C4.44596 68.3558 4.464 68.282 4.56278 68.2574C4.77829 68.2036 5.3272 66.3055 5.23462 65.9342C5.19874 65.7903 5.3337 65.58 5.53444 65.4672C5.73516 65.3541 5.84106 65.1841 5.76945 65.0895C5.62196 64.8944 6.03085 63.6876 6.36912 63.3194C6.55908 63.1129 6.53658 63.0477 6.21914 62.8868C5.74858 62.648 5.64783 62.3 6.0582 62.3316C6.56541 62.3704 6.8994 62.0493 6.79348 61.6245C6.73155 61.3761 6.94612 60.8572 7.36406 60.244C7.83352 59.5554 7.97815 59.1792 7.84762 58.9864C7.70826 58.7809 7.74293 58.7176 7.98452 58.736C8.30817 58.761 8.34552 58.5809 8.13327 58.0197C8.07479 57.8647 8.14987 57.6598 8.30029 57.5644C8.46121 57.4623 8.52479 57.194 8.45467 56.9128C8.38088 56.6168 8.43559 56.4098 8.59828 56.3692C8.74264 56.3332 8.93301 56.1778 9.02102 56.0239C9.11399 55.8614 9.4345 55.7072 9.78564 55.6563C10.2896 55.5833 10.3575 55.5271 10.1941 55.3172C10.0865 55.1787 10.0737 55.1038 10.1657 55.1505C10.3517 55.2447 10.9167 54.6007 10.8572 54.3622C10.8128 54.1837 11.1869 53.6176 11.3815 53.5691C11.5241 53.5335 11.8689 53 12.5201 51.807C12.7385 51.4072 12.991 51.0616 13.0814 51.0391C13.3169 50.9804 14.0908 49.8675 14.156 49.4936C14.1862 49.32 14.3332 49.1473 14.4827 49.11C14.632 49.0728 14.7758 48.9185 14.8023 48.7671C14.8286 48.6157 15.0245 48.4484 15.2377 48.3953C15.4507 48.3421 15.6017 48.205 15.5732 48.0906C15.5446 47.9761 15.6785 47.7388 15.8707 47.5631C16.1283 47.3279 16.1519 47.2093 15.9609 47.1124C15.8182 47.04 15.6848 46.9021 15.664 46.8058C15.6435 46.7097 15.7465 46.7391 15.8931 46.8716C16.2853 47.2259 16.463 47.1178 17.1905 46.0823C17.5526 45.5671 17.9039 45.1732 17.9712 45.2074C18.0385 45.2415 18.2279 45.1841 18.3925 45.0797C18.6206 44.935 18.6273 44.8572 18.4209 44.7524C17.9756 44.5265 18.0485 44.3328 18.5433 44.4278C18.9195 44.5 19.035 44.4561 19.165 44.1913C19.2529 44.0123 19.4226 43.8415 19.5421 43.8117C19.6617 43.7819 19.741 43.6831 19.7184 43.5923C19.6957 43.5014 19.8059 43.3949 19.9632 43.3557C20.1221 43.3161 20.2127 43.1375 20.1669 42.9539C20.1203 42.767 20.2117 42.5917 20.3772 42.5504C20.5384 42.5102 20.8383 42.3173 21.0439 42.1216C21.2496 41.9259 21.644 41.6919 21.9204 41.6015C22.2141 41.5055 22.4374 41.3026 22.4576 41.1132C22.4766 40.9351 22.5825 40.8122 22.6925 40.8398C22.8027 40.8676 23.0547 40.7271 23.2529 40.5273C23.4508 40.3275 23.7654 40.126 23.9519 40.0795C24.1382 40.033 24.265 39.8914 24.2334 39.7648C24.1578 39.4614 24.6091 39.1878 25.2151 39.1694C25.4953 39.1609 25.6837 39.082 25.6592 38.9837C25.6104 38.7879 26.5499 38.0276 26.9699 37.9229C27.2088 37.8633 27.2014 37.8223 26.9197 37.6439C26.6174 37.4523 26.631 37.4452 27.0828 37.5593C27.4888 37.6621 27.5938 37.6387 27.6782 37.4265C27.7347 37.2848 28.0043 37.09 28.2775 36.9936C28.5508 36.8972 28.8941 36.6663 29.0402 36.4805C29.1864 36.2947 29.6002 36.0427 29.9596 35.9204C30.3191 35.7982 30.7417 35.5338 30.8988 35.3326C31.0559 35.1316 31.3043 34.9765 31.4507 34.9877C31.5971 34.9989 31.7518 34.9197 31.7943 34.8115C31.837 34.7033 32.2649 34.4632 32.7451 34.2776C33.2256 34.0922 33.7345 33.7968 33.876 33.6209C34.0177 33.4452 34.2947 33.2764 34.4915 33.246C35.1183 33.1488 35.3183 33.0391 35.2642 32.8223C35.2282 32.6777 35.4704 32.5596 36.0297 32.4486C36.4796 32.3592 37.0015 32.14 37.1891 31.9614C37.3767 31.7828 37.7321 31.5592 37.979 31.4646C38.2258 31.3699 38.5044 31.155 38.5982 30.9868C38.7025 30.7998 38.7898 30.7551 38.8227 30.8716C38.8753 31.0574 39.2095 30.91 40.3797 30.1845C40.5727 30.065 41.1101 29.8675 41.5738 29.7455C42.1396 29.5969 42.4514 29.4232 42.5217 29.217C42.6053 28.9723 42.6932 28.9364 42.9536 29.0399C43.1959 29.1366 43.378 29.0963 43.658 28.8843C43.8657 28.7271 44.3234 28.4732 44.6753 28.3204C45.0271 28.1674 45.3895 27.9759 45.4807 27.8949C45.6983 27.7015 45.9046 27.6223 47.792 27.0092C48.668 26.7244 49.4197 26.4089 49.4623 26.3079C49.505 26.2068 50.0453 25.9975 50.6631 25.8428C51.2809 25.6882 52.5673 25.2209 53.522 24.8048C54.4766 24.3884 55.988 23.8694 56.8807 23.6516C57.7733 23.4336 58.9984 23.0457 59.603 22.7894C60.6348 22.3523 62.5145 21.9064 62.9077 22.0057C63.0048 22.0303 63.1811 21.9624 63.2996 21.8551C63.4181 21.7478 63.8385 21.6434 64.2337 21.6231C64.6292 21.6028 65.0204 21.5245 65.1036 21.4492C65.1869 21.3739 65.6014 21.2101 66.0251 21.0855C66.4488 20.9608 66.8069 20.7658 66.821 20.6523C66.8385 20.5105 66.9739 20.4671 67.2539 20.5136C67.4781 20.5507 67.8388 20.61 68.0555 20.6453C68.2765 20.6813 68.7329 20.577 69.0948 20.4078C69.495 20.2206 69.831 20.1522 69.9799 20.2278C70.1455 20.3118 70.2907 20.2662 70.4475 20.0812C70.6112 19.8879 70.7241 19.8548 70.851 19.9631C70.9547 20.0516 71.5455 19.9747 72.2908 19.7752C72.9858 19.5893 73.893 19.407 74.3067 19.3703C74.8844 19.3192 75.1281 19.2143 75.3587 18.9183C75.5236 18.7062 75.6785 18.6125 75.7028 18.71C75.7271 18.8073 75.6506 18.9579 75.533 19.0444C75.4152 19.131 75.6227 19.0923 75.9941 18.9584C76.3654 18.8246 76.7719 18.7673 76.8973 18.831C77.0228 18.8946 77.4178 18.915 77.7749 18.876C78.1321 18.8371 78.6657 18.8266 78.961 18.8526C79.732 18.9207 80.7871 18.7166 81.1414 18.4308C81.3219 18.2854 81.4619 18.2472 81.4843 18.3372C81.5154 18.4617 82.7698 18.4231 83.5951 18.2722C83.7017 18.2528 83.8865 18.2622 84.0059 18.2932C84.1254 18.3243 84.6666 18.2167 85.2089 18.0543C85.8515 17.8618 86.1672 17.8289 86.1154 17.9601C86.0659 18.0858 86.1819 18.0878 86.4241 17.9656C86.6373 17.8581 86.878 17.8265 86.9586 17.8954C87.0394 17.9644 87.1694 17.9627 87.2477 17.8917C87.3261 17.8208 87.4569 17.8198 87.5384 17.8893C87.6198 17.9589 88.3642 17.9026 89.1923 17.7641C90.0206 17.6257 90.8261 17.561 90.9825 17.6205C91.273 17.731 91.8436 17.684 92.9716 17.4568C93.321 17.3866 93.6666 17.3802 93.7397 17.4428C93.8128 17.5053 94.1508 17.487 94.4908 17.4022C94.8309 17.3174 95.2386 17.3139 95.397 17.3943C95.6261 17.5106 95.7089 17.4811 95.8032 17.2491C95.8683 17.0888 95.9431 17.0384 95.9695 17.1369C96.0477 17.4304 96.9194 17.4672 97.3061 17.1935C97.6852 16.9254 99.1751 16.9823 99.2462 17.2676C99.2682 17.356 99.5285 17.3193 99.8328 17.1848C100.144 17.0473 100.516 16.9975 100.696 17.0692C100.939 17.166 101.02 17.1408 101.046 16.96C101.069 16.8003 101.279 16.8331 101.698 17.0619C102.16 17.3134 102.387 17.3411 102.591 17.1706C102.84 16.9624 103.112 16.9365 104.445 16.9941C104.614 17.0015 104.972 16.9746 105.24 16.9345C105.509 16.8942 106.034 16.8402 106.408 16.8143C106.93 16.7779 107.126 16.688 107.255 16.4256C107.409 16.1124 107.442 16.1124 107.654 16.4255C107.91 16.8037 108.179 16.952 108.891 17.1068C109.293 17.194 109.377 17.166 109.418 16.9314C109.481 16.5687 109.789 16.4935 109.871 16.8207C109.922 17.0243 110.002 17.02 110.276 16.7989C110.548 16.5797 110.747 16.5646 111.251 16.7251C111.599 16.8361 112.183 16.8525 112.548 16.7615C113.051 16.636 113.255 16.6698 113.393 16.9016C113.584 17.2218 114.026 17.2366 113.947 16.9203C113.922 16.8197 114.035 16.7477 114.198 16.7602C114.361 16.7727 114.514 16.6837 114.538 16.5626C114.562 16.4413 114.623 16.4792 114.673 16.6463C114.746 16.8872 114.876 16.9072 115.3 16.7427C115.689 16.5914 115.823 16.6008 115.792 16.7774C115.764 16.94 115.843 16.9612 116.032 16.8413C116.223 16.7198 116.336 16.7533 116.384 16.9458C116.43 17.1297 116.547 17.1706 116.717 17.0625C116.861 16.9711 116.997 16.9647 117.018 17.0487C117.038 17.1326 117.369 17.1752 117.752 17.1432C118.136 17.1112 118.506 17.134 118.576 17.1936C118.646 17.2534 119.074 17.2655 119.526 17.2206C119.978 17.1758 120.557 17.2358 120.812 17.3541C121.067 17.4724 121.473 17.5198 121.716 17.4593C121.958 17.3989 122.175 17.4238 122.198 17.5147C122.221 17.6056 122.368 17.6478 122.525 17.6086C122.683 17.5694 122.794 17.4694 122.774 17.3864C122.753 17.3033 123.014 17.2555 123.354 17.2799C123.693 17.3042 123.981 17.4035 123.992 17.5003C124.046 17.947 124.177 18.0565 124.45 17.8832C124.646 17.759 124.712 17.7731 124.651 17.9262C124.595 18.0705 124.698 18.1199 124.934 18.0611C125.139 18.0101 125.379 18.0619 125.468 18.1765C125.557 18.291 126.125 18.3517 126.729 18.3116C127.522 18.2588 127.884 18.3202 128.027 18.5313C128.236 18.8409 129.389 19.1307 129.61 18.9297C129.76 18.7944 130.522 19.214 130.585 19.4663C130.608 19.558 130.854 19.6634 131.133 19.7003C131.435 19.7402 131.622 19.871 131.596 20.0222C131.533 20.3855 132.069 20.67 132.578 20.5432C132.816 20.4838 133.088 20.5339 133.182 20.6548C133.36 20.8834 134.14 20.7075 134.288 20.4052C134.334 20.3111 134.451 20.3017 134.548 20.3843C134.644 20.4671 134.633 20.5574 134.522 20.5851C134.411 20.6127 134.35 20.7549 134.386 20.901C134.429 21.0745 134.34 21.1579 134.128 21.1416C133.949 21.1279 133.671 21.2226 133.511 21.3521C133.345 21.4858 133.089 21.5547 132.918 21.5116C132.747 21.4684 132.49 21.5376 132.323 21.672C132.145 21.8156 131.836 21.8939 131.535 21.8717C130.942 21.8278 130.387 22.22 130.86 22.3488C131.03 22.3951 130.735 22.5095 130.126 22.6331C129.565 22.7467 129.056 22.7673 128.994 22.6789C128.932 22.5905 128.759 22.5483 128.611 22.5854C128.462 22.6225 128.313 22.5412 128.279 22.4049C128.231 22.2145 127.973 22.2178 127.168 22.4185C126.297 22.6357 126.131 22.7293 126.188 22.97C126.227 23.1336 126.179 23.2032 126.076 23.1296C125.977 23.0579 125.688 22.9153 125.435 22.8129C125.02 22.6448 124.928 22.6638 124.491 23.0077C124.058 23.3482 123.964 23.3698 123.606 23.2096C123.276 23.0621 123.083 23.094 122.516 23.3892C121.514 23.9114 121.148 23.9641 120.94 23.6154C120.799 23.3779 120.668 23.3562 120.379 23.5221C120.172 23.6413 119.85 23.7682 119.664 23.804C119.478 23.8397 119.352 23.976 119.385 24.1067C119.461 24.4134 119.285 24.4512 118.796 24.2327C118.58 24.1362 118.193 24.0897 117.935 24.1292C117.678 24.1687 117.35 24.1714 117.206 24.135C117.035 24.0919 116.974 24.1845 117.028 24.4043C117.086 24.6337 117.015 24.7317 116.803 24.7156C116.634 24.7025 116.526 24.6136 116.563 24.5176C116.601 24.4219 116.244 24.4402 115.769 24.5585C115.102 24.725 114.879 24.8599 114.785 25.155C114.641 25.6051 114.216 25.757 113.973 25.4451C113.863 25.3036 113.918 25.1906 114.126 25.1298C114.305 25.0777 114.346 25.0248 114.218 25.0121C114.091 24.9996 113.643 25.192 113.224 25.4398C112.806 25.6876 112.384 25.8704 112.287 25.8458C112.189 25.8212 112.137 25.908 112.169 26.0387C112.202 26.1692 112.116 26.4082 111.979 26.5697C111.774 26.8122 111.783 26.8826 112.03 26.9735C112.194 27.0342 112.558 27.3182 112.838 27.6045C113.361 28.1387 113.824 28.2884 114.121 28.0196C114.226 27.9242 114.179 27.8387 113.995 27.7899C113.755 27.7269 113.754 27.6986 113.988 27.6381C114.146 27.5973 114.419 27.6858 114.596 27.8349C114.772 27.984 115.055 28.0715 115.224 28.0293C115.466 27.9688 115.473 27.915 115.252 27.776C115.068 27.6599 115.035 27.5633 115.155 27.493C115.508 27.2875 117.277 27.0263 117.314 27.1742C117.334 27.2562 117.216 27.357 117.051 27.3981C116.782 27.4653 116.788 27.4912 117.107 27.6533C117.398 27.801 117.522 27.7795 117.79 27.5347C118.062 27.2863 118.193 27.2697 118.565 27.4362C118.994 27.6283 119.018 27.6223 119.129 27.296C119.226 27.0124 119.304 26.9786 119.595 27.0945C119.787 27.171 120.02 27.1653 120.112 27.0817C120.204 26.9982 120.557 26.9797 120.897 27.0402C121.363 27.1236 121.661 27.0726 122.115 26.8313C122.861 26.4358 122.804 26.4446 122.871 26.7143C122.934 26.9685 124.648 26.8126 125.126 26.5093C125.331 26.3791 125.399 26.4052 125.365 26.6006C125.331 26.7962 125.483 26.8544 125.899 26.805C126.322 26.7551 126.44 26.6834 126.331 26.5434C126.231 26.4147 126.346 26.3093 126.678 26.2266C126.951 26.1584 127.195 26.1815 127.219 26.2776C127.243 26.3738 127.347 26.3756 127.452 26.2812C127.583 26.1625 127.645 26.2555 127.654 26.5846L127.667 27.0595L128.726 26.7383C129.673 26.4514 129.785 26.372 129.781 25.9938C129.774 25.2941 130.199 25.2308 130.367 25.9065C130.532 26.5656 130.648 26.5756 131.5 26.0031C132.013 25.6584 132.085 25.6408 132.045 25.8692C132.013 26.0531 132.084 26.0785 132.281 25.9536C132.447 25.8486 132.584 25.8592 132.614 25.9796C132.688 26.2764 134.101 25.711 134.47 25.2369C134.641 25.0169 134.785 24.9379 134.812 25.0488C134.839 25.1537 134.757 25.2653 134.631 25.2967C134.465 25.3382 134.472 25.3892 134.657 25.483C135.306 25.8124 140.184 23.6678 140.572 22.8824C140.617 22.7924 140.778 22.6704 140.931 22.6111C141.32 22.4596 142.1 21.4912 142.383 20.808C142.514 20.4919 142.716 20.1271 142.833 19.9973C142.996 19.816 142.952 19.5426 142.641 18.8167C142.276 17.9655 142.191 17.8832 141.783 17.9848C141.335 18.0965 141.063 17.7701 140.845 16.8588C140.807 16.6994 140.588 16.533 140.358 16.4889C140.128 16.4446 139.968 16.3351 140.003 16.2456C140.039 16.1561 139.917 16.0229 139.733 15.9495C139.548 15.876 139.372 15.7136 139.341 15.5885C139.31 15.4632 139.175 15.388 139.042 15.4213C138.893 15.4583 138.728 15.2436 138.616 14.8691C138.32 13.8719 138.185 13.683 137.527 13.3426C137.094 13.1187 136.907 12.9016 136.919 12.6397C136.93 12.4307 136.754 12.1122 136.528 11.9299C136.303 11.7479 136.075 11.4249 136.022 11.2117C135.968 10.9987 135.763 10.7116 135.565 10.5735C135.367 10.4356 135.151 10.1187 135.086 9.86962C135.009 9.57913 134.864 9.4423 134.68 9.48805C134.523 9.52727 134.368 9.45576 134.337 9.32918C134.305 9.20261 134.134 9.08779 133.955 9.07413C133.741 9.05767 133.644 8.92771 133.67 8.69075C133.696 8.44118 133.518 8.23581 133.084 8.01525C132.735 7.838 132.385 7.48574 132.292 7.21568C132.199 6.95003 131.961 6.67887 131.763 6.61305C131.564 6.54707 131.354 6.30363 131.296 6.07179C131.23 5.80624 130.941 5.54853 130.515 5.37567C130.143 5.22476 129.81 4.98491 129.775 4.8428C129.739 4.70052 129.581 4.61629 129.424 4.65552C129.265 4.69512 129.101 4.57994 129.056 4.39635C129.01 4.21458 128.899 4.08446 128.808 4.10714C128.483 4.18797 128.061 2.8236 128.296 2.45227C128.493 2.13988 128.471 2.0672 128.086 1.75696C127.601 1.36565 127.677 1.26353 128.24 1.54917C128.872 1.87 128.802 1.5551 128.124 1.02667C127.772 0.751775 127.467 0.460461 127.446 0.378997C127.426 0.297696 127.263 0.34931 127.083 0.494088C126.904 0.638708 126.56 0.786432 126.319 0.822518C125.953 0.877113 125.88 1.00252 125.881 1.57723C125.882 2.02865 125.969 2.3098 126.133 2.39213C126.311 2.48184 126.323 2.44007 126.172 2.24541C126.006 2.0306 126.041 1.96822 126.34 1.95067C126.548 1.93842 126.719 2.01928 126.721 2.13044C126.722 2.2416 126.823 2.26901 126.946 2.19123C127.081 2.10509 127.201 2.18225 127.253 2.38897C127.313 2.63188 127.227 2.74163 126.949 2.77629C126.645 2.81394 126.532 3.01366 126.43 3.69258C126.302 4.53785 126.31 4.56407 126.741 4.69786C126.984 4.77324 127.146 4.92972 127.1 5.04532C127.055 5.16093 127.141 5.22464 127.293 5.18693C127.444 5.14918 127.654 5.26273 127.759 5.43939C127.864 5.61601 128.03 5.68856 128.127 5.60062C128.224 5.51272 128.323 5.51965 128.347 5.61582C128.371 5.71199 128.314 5.80973 128.222 5.8328C128.129 5.85591 128.046 6.03472 128.036 6.23018C128.027 6.4256 128.097 6.56614 128.192 6.54241C128.287 6.51873 128.402 6.64805 128.447 6.82982C128.492 7.01159 128.62 7.13763 128.731 7.10995C128.842 7.08228 128.899 7.14717 128.857 7.25423C128.814 7.36128 128.871 7.42617 128.982 7.3985C129.093 7.37083 129.226 7.51752 129.278 7.72441C129.329 7.93146 129.524 8.21856 129.711 8.36221C129.898 8.50603 130.297 8.97733 130.596 9.40932C130.896 9.84125 131.221 10.1751 131.317 10.1511C131.413 10.1271 131.547 10.3283 131.615 10.5982C131.757 11.1694 133.287 12.7996 133.711 12.8323C134.093 12.8616 134.175 13.2361 133.844 13.4459C133.442 13.7007 133.659 14.1653 134.445 14.7338C134.836 15.0172 135.277 15.4758 135.424 15.7529C135.571 16.0301 135.776 16.2355 135.88 16.2097C135.983 16.1839 136.051 16.3214 136.03 16.5154C135.97 17.0759 136.499 17.9674 137.12 18.353C137.723 18.7276 137.809 19.2391 137.29 19.3683C137.126 19.4093 136.881 19.5781 136.747 19.7437C136.612 19.9093 136.128 20.189 135.671 20.3655C135.081 20.593 134.91 20.6169 135.083 20.4475C135.3 20.2353 135.291 20.1974 134.999 20.1078C134.706 20.0182 134.702 20.002 134.962 19.9622C135.538 19.874 135.721 19.7557 135.66 19.5114C135.626 19.3751 135.679 19.2435 135.777 19.219C136.028 19.1563 135.478 18.0154 135.135 17.8872C134.98 17.8294 134.687 17.5029 134.484 17.1618C134.137 16.5789 133.205 15.999 132.783 16.1041C132.679 16.13 132.568 16.0589 132.537 15.9462C132.469 15.7045 131.692 15.426 131.042 15.4109C130.782 15.4049 130.55 15.2667 130.507 15.092C130.463 14.9173 130.231 14.7791 129.972 14.7732C129.334 14.7583 128.545 14.4811 128.48 14.2489C128.417 14.0254 127.649 13.9481 126.88 14.0875C126.703 14.1196 126.602 14.0825 126.656 14.0048C126.711 13.9271 126.43 13.7207 126.033 13.5459C125.245 13.1998 124.656 13.2224 124.94 13.5879C125.087 13.7766 125.04 13.7981 124.641 13.7239C124.381 13.6756 124.114 13.6021 124.048 13.5606C123.597 13.2771 122.424 13.0704 121.945 13.1899C121.399 13.326 120.67 13.2912 119.083 13.0536C118.645 12.9881 117.942 13.063 117.258 13.248C116.127 13.554 115.842 13.4767 116.364 13.0056C116.615 12.7785 116.592 12.7648 116.186 12.9004C115.65 13.0798 114.766 12.8949 114.69 12.587C114.661 12.4727 114.549 12.4011 114.44 12.4282C114.304 12.4622 114.329 12.5615 114.52 12.7478C114.895 13.1134 114.936 13.3578 114.636 13.4326C114.498 13.4671 114.228 13.2015 114.031 12.8377C113.61 12.0563 113.117 12.0154 112.59 12.7182C112.234 13.1931 112.234 13.1933 112.252 12.8184C112.266 12.532 112.183 12.4645 111.903 12.5343C111.701 12.5847 111.342 12.5582 111.105 12.4756C110.551 12.2821 110.371 12.3256 110.448 12.6339C110.481 12.7703 110.423 12.9032 110.319 12.9294C110.214 12.9555 110.1 12.8654 110.066 12.729C110.032 12.5927 109.876 12.5133 109.718 12.5525C109.561 12.5917 109.414 12.5495 109.391 12.4586C109.368 12.3677 109.221 12.3254 109.064 12.3647C108.906 12.4039 108.796 12.511 108.819 12.6025C108.844 12.7014 108.679 12.7245 108.416 12.6592C108.041 12.5666 107.943 12.6043 107.795 12.9003C107.699 13.0933 107.565 13.2649 107.498 13.2817C107.43 13.2984 107.343 13.1819 107.303 13.023C107.251 12.8164 107.056 12.7664 106.616 12.848C106.279 12.9106 105.914 12.8868 105.807 12.7951C105.7 12.7035 105.307 12.7123 104.936 12.8149C104.532 12.926 104.24 12.9227 104.211 12.8064C104.118 12.4344 103.268 12.2204 102.8 12.4512C102.527 12.5863 102.336 12.6006 102.308 12.4882C102.283 12.3876 102.069 12.3506 101.832 12.4063C101.595 12.4619 101.161 12.4546 100.866 12.3901C100.138 12.2308 99.3589 12.4403 99.051 12.8783C98.8112 13.2198 98.7989 13.2183 98.8379 12.8533C98.874 12.5177 98.784 12.4738 98.1657 12.5254C97.7732 12.5582 97.4098 12.6451 97.3581 12.7187C97.3063 12.7924 97.0401 12.7476 96.7669 12.6194C96.4255 12.4591 95.9742 12.4495 95.3263 12.5887C94.8071 12.7001 94.3168 12.7418 94.2361 12.6813C94.1063 12.584 92.5272 12.7753 91.6612 12.9933C91.4848 13.0379 91.2117 12.9931 91.0545 12.894C90.8973 12.7949 90.4893 12.7834 90.1479 12.8685C89.8064 12.9537 89.1903 12.9884 88.7789 12.9461C88.3674 12.9035 87.3893 12.955 86.6052 13.0608C85.821 13.1665 84.7745 13.2733 84.2793 13.2981C83.7842 13.3231 83.1103 13.4551 82.7818 13.5918C82.3907 13.7544 81.9996 13.7887 81.6488 13.6909C81.3543 13.6086 80.7451 13.632 80.2953 13.7428C79.8454 13.8535 79.0983 13.9256 78.6347 13.903C77.792 13.8618 77.1723 14.0126 76.6039 14.3978C76.4375 14.5103 76.3647 14.6564 76.4422 14.7224C76.5194 14.7885 76.4386 14.8314 76.2622 14.818C76.0858 14.8044 75.9269 14.7342 75.9089 14.6619C75.8607 14.4684 74.6528 14.4224 73.7615 14.5799C73.3347 14.6554 72.0942 14.8903 71.005 15.1018C69.0358 15.4842 69.0252 15.4886 69.1072 15.8687C69.1881 16.2444 69.1852 16.2457 68.9399 15.9428C68.6177 15.5449 68.096 15.5098 67.6654 15.8569C67.478 16.0079 67.0841 16.1384 66.7902 16.1466C66.1443 16.1647 63.3058 16.8549 63.1882 17.0225C63.1421 17.0881 62.9255 17.1073 62.707 17.0653C62.4406 17.0141 62.3231 17.0439 62.351 17.1558C62.3753 17.2533 62.1431 17.3408 61.7921 17.3664C61.2651 17.4049 61.2178 17.4441 61.4049 17.6867C61.6079 17.9503 61.5988 17.9536 61.2094 17.7581C60.9845 17.6453 60.5865 17.6063 60.3248 17.6715C60.0632 17.7367 59.6639 17.7545 59.4375 17.7111C59.1299 17.6519 59.0392 17.6856 59.0786 17.8444C59.1187 18.007 58.4396 18.2374 56.1904 18.8243C54.57 19.2473 53.1006 19.7121 52.9174 19.8598C52.7346 20.0071 52.3649 20.1827 52.0958 20.2498C51.7581 20.334 51.6278 20.4616 51.6757 20.6617C51.7347 20.9088 51.7089 20.9218 51.5018 20.7489C51.3117 20.5903 50.8888 20.645 49.5587 20.9999C48.6235 21.2496 47.6972 21.5838 47.5001 21.7428C47.3029 21.9016 46.711 22.1422 46.1848 22.2771C45.5462 22.4409 45.2129 22.6079 45.183 22.7791C45.1585 22.9202 45.0448 23.0119 44.9307 22.9832C44.8165 22.9544 44.4441 23.0506 44.103 23.1971C43.6245 23.4024 43.5229 23.522 43.658 23.7203C43.7969 23.924 43.7818 23.9392 43.5857 23.7934C43.2945 23.5771 41.9407 24.0188 40.3648 24.844C39.8229 25.1279 39.07 25.485 38.692 25.6375C38.3138 25.7901 37.9323 26.0411 37.844 26.1954C37.7558 26.3496 37.4904 26.5241 37.2541 26.583C37.018 26.6418 36.4962 26.8874 36.0947 27.1286C35.6932 27.3699 35.2279 27.5566 35.0604 27.5438C34.7085 27.5167 32.9774 28.5253 33.0279 28.7278C33.0465 28.8024 32.8344 28.8704 32.5565 28.8787C32.2732 28.8874 31.9531 29.0099 31.8279 29.1576C31.7051 29.3027 31.4457 29.446 31.2517 29.4763C30.6419 29.5713 30.5663 29.6465 30.8809 29.845C31.1492 30.0142 31.1185 30.0325 30.6298 29.9964C30.1712 29.9624 30.0152 30.0321 29.7436 30.3911C29.5623 30.631 29.1002 30.9533 28.7167 31.1074C28.3329 31.2615 28.0333 31.4442 28.0506 31.5134C28.0678 31.5825 27.9731 31.6603 27.8404 31.6862C27.7076 31.7123 27.2481 31.8853 26.8194 32.071C26.2749 32.3066 26.1069 32.451 26.2629 32.5494C26.4215 32.6493 26.2468 32.7547 25.6601 32.9127C25.2057 33.0352 24.6477 33.3126 24.4201 33.529C24.1926 33.7457 23.8704 33.9568 23.7043 33.9982C23.2058 34.1225 22.398 34.8408 22.4631 35.102C22.4965 35.236 22.4024 35.3759 22.2536 35.413C22.1051 35.45 21.9634 35.584 21.9388 35.7109C21.9031 35.8953 21.8808 35.9008 21.8276 35.7386C21.7498 35.5015 21.1694 35.6004 21.2293 35.8405C21.2515 35.9296 21.0727 36.0998 20.8318 36.2187C20.591 36.3376 20.3757 36.5395 20.3534 36.6676C20.331 36.7955 19.9942 37.0283 19.6048 37.1848C19.2152 37.3412 18.8128 37.643 18.7104 37.8555C18.6078 38.0678 18.3989 38.2321 18.2463 38.2203C18.0776 38.2074 17.9927 38.3211 18.03 38.5096C18.0638 38.6803 18.0277 38.7418 17.9495 38.646C17.7743 38.4306 17.287 38.7152 17.3561 38.9926C17.3839 39.1038 17.2137 39.3353 16.9779 39.5069C16.7422 39.6786 16.3391 39.97 16.0821 40.1549C15.8253 40.3395 15.4987 40.6382 15.3564 40.8185C14.3808 42.0555 14.1232 42.3351 13.7808 42.5277C13.4796 42.6972 13.4423 42.825 13.6098 43.1134C13.8263 43.4859 13.5793 43.7302 13.3357 43.3846C13.233 43.2389 13.1058 43.2771 12.7547 43.5591C12.43 43.82 12.3376 44.0503 12.4218 44.3881C12.5095 44.7399 12.4472 44.8786 12.1705 44.9476C11.9684 44.998 11.7019 45.1829 11.5786 45.3585C11.4552 45.534 11.2988 45.6915 11.2309 45.7084C11.163 45.7254 10.6377 46.4092 10.0634 47.2281C9.4893 48.047 8.939 48.7371 8.84059 48.7616C8.74219 48.7862 8.67712 48.868 8.69595 48.9435C8.71477 49.0191 8.54044 49.2338 8.30853 49.4208C8.07663 49.6078 7.91031 49.8548 7.93895 49.9697C7.96758 50.0845 7.82438 50.2722 7.62062 50.3869C7.32947 50.5508 7.29801 50.6773 7.47308 50.9788C7.73131 51.4231 7.51653 51.9233 7.08198 51.8899C6.91616 51.8772 6.60859 52.115 6.3918 52.4235C6.1768 52.7295 5.92053 53 5.82212 53.0245C5.7239 53.049 5.70751 53.1912 5.7859 53.3407C5.8641 53.4902 5.82326 53.757 5.69534 53.9337C5.41641 54.3188 5.46548 54.8642 5.77348 54.8029C5.89431 54.7789 5.81691 54.8747 5.60148 55.0157C5.38609 55.1568 5.23806 55.386 5.27279 55.5253C5.30999 55.6746 5.513 55.7389 5.7676 55.6819C6.18857 55.5878 6.18863 55.5929 5.76755 55.8848C5.53003 56.0494 5.21645 56.1963 5.07072 56.2114C4.68152 56.2518 4.40293 56.9219 4.63093 57.2692C4.80242 57.5305 4.7812 57.551 4.46816 57.4264C3.93089 57.2124 3.69096 57.5501 3.96121 58.14C4.11389 58.4737 4.11764 58.6692 3.97161 58.7017C3.21571 58.8711 3.09741 58.9873 3.2124 59.4485C3.28034 59.7209 3.21881 59.9982 3.06927 60.093C2.92495 60.1845 2.85381 60.4476 2.9112 60.6777C2.97642 60.9393 2.9083 61.1227 2.72941 61.1673C2.54651 61.2129 2.48302 61.3978 2.55339 61.68C2.61392 61.9227 2.55787 62.2886 2.42898 62.4931C2.30004 62.6974 2.23594 63.0838 2.28628 63.3515C2.33682 63.6192 2.28908 63.9941 2.18017 64.1845C2.00852 64.4847 2.03613 64.5565 2.39002 64.7271C2.77665 64.9137 2.78598 64.904 2.56665 64.5427C2.38963 64.2511 2.39691 64.208 2.59736 64.3595C2.79228 64.5068 2.84623 64.5014 2.80807 64.3386C2.74326 64.0632 3.56123 63.947 3.74129 64.2061C3.82688 64.3292 3.75058 64.3839 3.51802 64.366C3.28713 64.3483 3.08754 64.4878 2.94284 64.7678C2.80975 65.0253 2.47347 65.2755 2.10116 65.3942C1.5539 65.5683 1.50547 65.6332 1.68827 65.948C1.91112 66.3316 1.69021 66.7796 1.22068 66.8967C0.911913 66.9737 1.07824 67.5564 1.43492 67.6472C1.68905 67.7117 1.59805 68.2754 1.24624 68.8175C0.836429 69.4487 0.88222 70.0142 1.36511 70.2903C1.77168 70.5227 1.76853 70.5337 1.25743 70.6611C0.837661 70.7658 0.770609 70.8438 0.927416 71.0453C1.03557 71.1842 1.05295 71.262 0.966211 71.218C0.651502 71.0583 0.413848 72.5108 0.596616 73.4762C0.699795 74.02 0.739965 74.476 0.685984 74.4895C0.632059 74.5031 0.679864 74.9808 0.79237 75.5515C0.905012 76.1219 0.932301 76.6481 0.853201 76.7209C0.639807 76.9171 0.797886 78.1792 1.06927 78.4437C1.20797 78.5792 1.28696 78.9423 1.26204 79.3307C1.22297 79.9393 1.27019 80.0117 1.89817 80.3043C2.48081 80.5759 2.61678 80.5785 2.86039 80.3231ZM2.62769 70.915C2.61879 70.8793 2.74023 70.818 2.89757 70.7788C3.05491 70.7395 3.20159 70.7795 3.22355 70.8676C3.24547 70.9555 3.12404 71.0168 2.95369 71.0038C2.78329 70.9907 2.63659 70.9507 2.62769 70.915ZM3.80836 67.5137C3.7885 67.4405 3.86944 67.4052 3.98834 67.4353C4.10723 67.4653 4.23452 67.6159 4.27131 67.77C4.32867 68.0114 4.30385 68.0223 4.09134 67.8484C3.9557 67.7374 3.82841 67.5868 3.80836 67.5137ZM2.91649 66.3861C2.89383 66.2953 2.96112 66.1995 3.066 66.1733C3.1709 66.1472 3.27525 66.2002 3.29791 66.291C3.32057 66.3819 3.2533 66.4777 3.1484 66.5038C3.04352 66.53 2.93915 66.477 2.91649 66.3861ZM7.23473 58.1133C7.14722 58.0386 7.21451 57.9428 7.38424 57.9005C7.55397 57.8582 7.65834 57.9112 7.61615 58.0182C7.57398 58.1253 7.50669 58.221 7.46664 58.231C7.42659 58.241 7.32224 58.188 7.23473 58.1133ZM5.12925 58.1995C5.09526 58.0632 5.20667 57.9169 5.37678 57.8745C5.63024 57.8113 5.65457 57.8528 5.51067 58.1044C5.41403 58.2733 5.30261 58.4195 5.26314 58.4294C5.22347 58.4393 5.16324 58.3358 5.12925 58.1995ZM6.12933 57.3358C6.10667 57.245 6.17909 57.1479 6.29009 57.1202C6.40109 57.0926 6.45757 57.1575 6.4154 57.2645C6.37321 57.3716 6.30096 57.4686 6.25462 57.4801C6.20828 57.4917 6.15199 57.4267 6.12933 57.3358ZM7.14263 56.821C7.16902 56.6701 7.28781 56.5713 7.40713 56.6014C7.54031 56.6351 7.53763 56.7356 7.40037 56.8627C7.10058 57.1398 7.08752 57.1378 7.14263 56.821ZM6.47243 56.2746C6.43712 56.133 6.50548 56.0415 6.62437 56.0716C6.74327 56.1016 6.85798 56.196 6.87932 56.2816C6.90067 56.3672 6.83226 56.4585 6.72737 56.4847C6.62249 56.5108 6.50774 56.4162 6.47243 56.2746ZM128.596 25.1008C128.77 25.0133 128.891 24.8606 128.866 24.7613C128.842 24.6619 128.884 24.6124 128.96 24.6513C129.192 24.7688 128.958 25.133 128.609 25.1983C128.314 25.2534 128.313 25.2439 128.596 25.1008ZM131.251 23.2436C131.277 23.0922 131.323 22.9622 131.353 22.9547C131.383 22.9473 131.485 23.0404 131.579 23.1616C131.683 23.2947 131.642 23.4092 131.477 23.4505C131.311 23.4917 131.222 23.4096 131.251 23.2436ZM118.16 26.5073C117.911 26.3502 117.925 26.3026 118.246 26.2228C118.457 26.1701 118.707 26.2262 118.802 26.3475C118.902 26.4762 118.866 26.5946 118.716 26.632C118.575 26.6672 118.325 26.6111 118.16 26.5073ZM5.86451 54.2426C5.77573 54.1668 5.90046 54.0593 6.14641 53.9994C6.5013 53.9132 6.53934 53.9374 6.34129 54.1237C6.0359 54.4108 6.05572 54.4059 5.86451 54.2426ZM117.093 25.5863C117.22 25.4058 117.281 25.4158 117.333 25.6255C117.371 25.78 117.494 25.8837 117.605 25.856C117.716 25.8283 117.772 25.8938 117.73 26.0019C117.682 26.1225 117.512 26.1268 117.288 26.0128C117.016 25.8748 116.966 25.7665 117.093 25.5863ZM134.594 21.5142C134.643 21.4435 134.807 21.3966 134.956 21.41C135.121 21.4248 135.086 21.4752 134.866 21.5386C134.666 21.5958 134.544 21.5848 134.594 21.5142ZM142.304 19.3469C142.281 19.256 142.348 19.1602 142.453 19.1341C142.558 19.1079 142.663 19.1609 142.685 19.2518C142.708 19.3426 142.641 19.4384 142.536 19.4645C142.431 19.4907 142.326 19.4377 142.304 19.3469ZM118.63 24.7995C118.913 24.3963 118.973 24.5101 118.759 25.0458C118.673 25.2598 118.556 25.3677 118.499 25.2855C118.441 25.2032 118.5 24.9847 118.63 24.7995ZM118.121 24.4658C118.149 24.3189 118.204 24.3468 118.261 24.537C118.313 24.7092 118.292 24.8179 118.215 24.7788C118.138 24.7397 118.095 24.5988 118.121 24.4658ZM124.173 23.0001C124.152 22.9145 124.037 22.82 123.918 22.79C123.799 22.76 123.731 22.8514 123.766 22.9931C123.802 23.1347 123.916 23.2293 124.021 23.2031C124.126 23.177 124.195 23.0857 124.173 23.0001ZM133.266 20.4698C133.256 20.4297 133.322 20.3296 133.413 20.2473C133.504 20.1649 133.598 20.1764 133.622 20.2726C133.646 20.3688 133.579 20.469 133.475 20.4951C133.37 20.5213 133.276 20.51 133.266 20.4698ZM121.464 23.2924C121.307 23.2116 121.14 23.1993 121.094 23.2647C121.048 23.3303 121.177 23.3963 121.381 23.4115C121.675 23.4333 121.692 23.409 121.464 23.2924ZM108.295 16.5932C108.207 16.5185 108.222 16.436 108.327 16.4098C108.431 16.3837 108.589 16.4234 108.676 16.4981C108.764 16.5728 108.75 16.6554 108.645 16.6815C108.54 16.7077 108.382 16.6679 108.295 16.5932ZM27.3962 32.6937C27.4242 32.5468 27.4792 32.5747 27.5363 32.7649C27.5879 32.937 27.5672 33.0457 27.4902 33.0067C27.4133 32.9676 27.3708 32.8267 27.3962 32.6937ZM32.9681 30.7049C33.0177 30.6342 33.1808 30.5872 33.3302 30.6007C33.4955 30.6155 33.4601 30.6659 33.2399 30.7292C33.0407 30.7865 32.9184 30.7755 32.9681 30.7049ZM31.2067 31.1726C31.1632 30.9983 31.5109 30.8337 31.6579 30.9592C31.7467 31.0352 31.6856 31.1306 31.5222 31.1714C31.3587 31.2121 31.2167 31.2128 31.2067 31.1726ZM51.6305 24.9311C51.5404 24.8542 51.61 24.8074 51.7938 24.8214C52.1515 24.849 52.2415 24.9524 51.9672 25.0208C51.8684 25.0454 51.717 25.005 51.6305 24.9311ZM127.744 4.01093C127.697 3.82388 127.752 3.6942 127.866 3.7229C127.98 3.75159 128.052 3.89636 128.026 4.04445C127.96 4.42371 127.844 4.41 127.744 4.01093ZM49.5003 23.7052C49.4128 23.6304 49.4751 23.5359 49.6386 23.4952C49.802 23.4544 49.9544 23.4954 49.9771 23.5863C49.9998 23.6772 49.9376 23.7716 49.8388 23.7963C49.74 23.8209 49.5878 23.7799 49.5003 23.7052ZM126.725 3.61302C126.819 3.46914 127.431 3.62724 127.371 3.78002C127.333 3.87481 127.164 3.88888 126.995 3.81137C126.826 3.73386 126.704 3.64468 126.725 3.61302ZM126.273 2.98403C126.25 2.89315 126.14 2.84147 126.029 2.86914C125.918 2.89681 125.899 2.98064 125.987 3.05536C126.074 3.13007 126.183 3.1818 126.23 3.17024C126.276 3.15869 126.295 3.07491 126.273 2.98403ZM63.8988 17.6768C63.8786 17.5956 63.9761 17.4569 64.1155 17.3684C64.285 17.2609 64.3536 17.2957 64.3226 17.4735C64.272 17.7638 63.9581 17.9144 63.8988 17.6768ZM67.5851 16.2123C67.5624 16.1215 67.6297 16.0257 67.7346 15.9996C67.8395 15.9734 67.9438 16.0264 67.9665 16.1173C67.9892 16.2081 67.9219 16.3039 67.817 16.33C67.7121 16.3562 67.6077 16.3032 67.5851 16.2123ZM126.959 0.86337C126.9 0.625748 127.248 0.611332 127.429 0.843884C127.54 0.986317 127.495 1.04931 127.295 1.03391C127.131 1.02124 126.98 0.944504 126.959 0.86337ZM126.616 0.145868C126.466 0.132397 126.303 0.179384 126.254 0.250032C126.204 0.320677 126.326 0.33162 126.525 0.274396C126.746 0.211068 126.781 0.160639 126.616 0.145868Z' fill='%23F9963B'/%3E%3C/svg%3E%0A");
+        }
+        .theme-style-modern .testimonial .col blockquote::before{
+            background-image: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M48 9V3C35.436 3 27 11.436 27 24V45H48V24H33C33 14.748 38.748 9 48 9ZM0 24V45H21V24H6C6 14.748 11.748 9 21 9V3C8.436 3 0 11.436 0 24Z' fill='%23F9963B'/%3E%3C/svg%3E%0A");
+        } 
+    :root {
+        --tertiary-color: #2eb0ed;
+        --tertiary-color-rgb: 46, 176, 237;           
+    }
+
+    body{
+    	font-size: 18px;
+    	line-height: 28px;
+    	color: #383532;
+    	font-family: Outfit;
+        font-weight: 400;
+        font-style: normal;        
+    }
+   
+        button,
+    input,
+    select,
+    textarea{
+        font-family: Outfit;
+    }
+    
+    .boxed {
+		max-width:1250px;
+		margin:0px auto; 
+	    box-shadow: 0 -5px 3px rgba(0, 0, 0, 0.5);
+        background-color:#fff;
+    }    
+
+    
+    /* Color Scheme Starts */
+    
+    /* primary scheme starts */
+    
+    .site-header.header-3 .main-navigation ul ul li a:hover,
+    .site-header.header-3 .main-navigation ul ul li a:focus,
+    .site-header.header-3 .main-navigation ul ul li:hover > a,
+    .site-header.header-3 .main-navigation ul ul li:focus > a{
+        color: #fff;
+    }  
+
+    .site-header.header-3 .top-bar{
+        background: #1d2124;
+    }
+
+    .site-header.header-3 .top-bar .contact-info span b,
+    .site-header.header-3 .top-bar .contact-info svg,
+    .site-header.header-3 .top-bar .contact-info{
+        color: #d1d1d1;
+    }
+    
+    .site-header.header-3 .top-bar .contact-info span a,
+    .site-header.header-3 .top-bar .social-networks li a{
+        color: #d1d1d1;
+    }
+    .site-header.header-3 .top-bar .social-networks li a:hover,
+    .site-header.header-3 .top-bar .contact-info span b:hover,
+    .site-header.header-3 .top-bar .contact-info span a:hover{
+        color: #f3880a;
+    }
+    
+
+    .site-header.header-3 .main-navigation a:active,
+    .site-header.header-3 .main-navigation li.current-menu-item a{
+        color: #F9963B;
+        border-bottom: 3px solid #F9963B;
+    }
+
+    .clients-area .contact-detail address:before{
+        background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F9963B' viewBox='0 0 384 512'%3E%3Cpath d='M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z'/%3E%3C/svg%3E") center center no-repeat;
+    }
+
+    .clients-area .contact-detail .email-link:before{
+        background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F9963B' viewBox='0 0 512 512'%3E%3Cpath d='M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z'/%3E%3C/svg%3E") center center no-repeat;
+    }
+
+    .clients-area .contact-detail .tel-link:before{
+        background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F9963B' viewBox='0 0 512 512'%3E%3Cpath d='M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z'/%3E%3C/svg%3E") center center no-repeat;
+    }
+
+    .clients-area .contact-detail .fax:before{
+        background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F9963B' viewBox='0 0 512 512'%3E%3Cpath d='M64 128H32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zm416 32V77.25c0-8.49-3.37-16.62-9.37-22.63L425.37 9.37c-6-6-14.14-9.37-22.63-9.37H160c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h320c17.67 0 32-14.33 32-32V192c0-17.67-14.33-32-32-32zM288 432c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-32c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v32zm0-128c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-32c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v32zm128 128c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-32c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v32zm0-128c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-32c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v32zm16-112H176V48h208v32c0 8.84 7.16 16 16 16h32v96z'/%3E%3C/svg%3E") center center no-repeat;
+    }
+        
+    /* primary scheme ends */    
+    
+    /* Color Scheme Ends */
+   
+    /* blogpage post title with link *   
+    
+	#primary .post .entry-header .entry-title a, 
+    .search #primary .page .entry-header .entry-title a
+	 {
+    	font-size: 30px;
+    	line-height: 36px;
+    	font-family: Outfit;
+        font-weight: 400;
+        font-style: normal;
+    }
+    
+    /* single post title */
+    #primary .post .entry-header .entry-title, 
+    .search #primary .page .entry-header .entry-title
+    {
+    	font-size: 30px;
+    	line-height: 36px;
+    	color: #121212;
+    	font-family: Outfit;
+        font-weight: 400;
+        font-style: normal;
+    }
+    
+    /* single page title */
+	.page-header .page-title
+    {
+    	font-size: 32px;
+    	line-height: 38px;
+    	color: #0D0804;
+    	font-family: Outfit;
+        font-weight: 400;
+        font-style: normal;
+    }           
+   
+
+    /* H1 content */
+    .elementor-template-full-width .site-content h1,
+	#primary .post .entry-content h1, 
+    #primary .page .entry-content h1 
+	{
+        font-family: "PT Sans";
+        font-size: 50px;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 60px;
+        color: #666666;
+    }
+    
+    /* H2 content */
+    .elementor-template-full-width .site-content h2,
+	#primary .post .entry-content h2, 
+    #primary .page .entry-content h2 {
+        font-family: "PT Sans";
+        font-size: 40px;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 48px;
+        color: #666666;
+    }
+    
+    /* H3 content */
+    .elementor-template-full-width .site-content h3,
+	#primary .post .entry-content h3, 
+    #primary .page .entry-content h3 {
+        font-family: "PT Sans";
+        font-size: 32px;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 38px;
+        color: #666666;
+    }
+    
+    /* H4 content */
+    .elementor-template-full-width .site-content h4,
+	#primary .post .entry-content h4, 
+    #primary .page .entry-content h4{
+        font-family: "PT Sans";
+        font-size: 30px;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 36px;
+        color: #666666;
+    }
+    
+    /* H5 content */
+    .elementor-template-full-width .site-content h5,
+	#primary .post .entry-content h5, 
+    #primary .page .entry-content h5 {
+        font-family: "PT Sans";
+        font-size: 24px;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 29px;
+        color: #666666;
+    }
+    
+    /* H6 content */
+    .elementor-template-full-width .site-content h6,
+	#primary .post .entry-content h6, 
+    #primary .page .entry-content h6 {
+        font-family: "PT Sans";
+        font-size: 20px;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 24px;
+        color: #666666;
+    }
+            .building-landing-page .site-header .site-branding .site-title,
+        .building-landing-page .main-navigation ul,
+        .building-landing-page .banner .quote-form .title,
+        .building-landing-page .banner .text .title,
+        .building-landing-page .banner .quote-form input[type="submit"],
+        .building-landing-page .about .header .main-title,
+        .building-landing-page .site-header.header-one .tel-link,
+        .building-landing-page .about .col .text-holder .title,
+        .building-landing-page .about .btn-holder a,
+        .building-landing-page .promotional-block .holder .main-title,
+        .building-landing-page .promotional-block .holder .btn,
+        .building-landing-page .our-projects .header .main-title,
+        .building-landing-page .our-projects .col .blp-text-holder .title,
+        .building-landing-page .our-projects .col .blp-text-holder .btn-more,
+        .building-landing-page .our-projects .btn-holder a,
+        .building-landing-page .our-services .header .main-title,
+        .building-landing-page .our-services .holder .title,
+        .building-landing-page .our-services .btn-holder a,
+        .building-landing-page .our-clients .header,
+        .building-landing-page .testimonial .header .main-title,
+        .building-landing-page .testimonial .col cite .text-holder .name,
+        .building-landing-page .testimonial .btn-holder a,
+        .building-landing-page .price-compare .header .main-title,
+        .building-landing-page .price-compare .column-holder .box .top-header h3,
+        .building-landing-page .price-compare .column-holder .box .top-header p,
+        .building-landing-page .price-compare .column-holder .box .price,
+        .building-landing-page .price-compare .column-holder .box .btn-holder .btn-buy,
+        .building-landing-page .our-team .header .main-title,
+        .building-landing-page .our-team .col .text-holder .name,
+        .building-landing-page .our-team .btn-holder .btn-view,
+        .building-landing-page .clients-area .text-holder .header .main-title,
+        .building-landing-page .counter-section .header .main-title,
+        .building-landing-page .counter-section .col strong,
+        .building-landing-page .promotional-block2 .header .main-title,
+        .building-landing-page .promotional-block2 form .title,
+        .building-landing-page .page-header .page-title,
+        .building-landing-page #crumbs,
+        .building-landing-page .inner-page.about-page .title,
+        .building-landing-page .inner-page.about-page .cta-section .btn,
+        .building-landing-page .services-page .services-holder .col .holder .title,
+        .building-landing-page .services-page .services-holder .col .holder .more-btn,
+        .building-landing-page .team-page .team-holder .text-holder .name,
+        .building-landing-page .portfolio-page .portfolio-filter-wrapper .button,
+        .building-landing-page .portfolio-page .portfolio-holder .col .text-holder .title,
+        .building-landing-page .portfolio-page .portfolio-holder .col .text-holder .btn-more,
+        .building-landing-page #primary .post .entry-header .entry-title,
+        .building-landing-page.search #primary .latest_post .entry-header .entry-title,
+        .building-landing-page #primary .post .entry-footer .btn-readmore,
+        .building-landing-page.search #primary .latest_post .entry-footer .btn-readmore,
+        .building-landing-page.error404 .error-holder h1,
+        .building-landing-page.error404 .error-holder .btn-back,
+        .building-landing-page #secondary .widget .widget-title,
+        .building-landing-page .widget.widget_construction_landing_page_featured_post .readmore,
+        .building-landing-page .widget.widget_construction_landing_page_recent_post ul li .entry-header .entry-title,
+        .building-landing-page .widget.widget_construction_landing_page_popular_post ul li .entry-header .entry-title,
+        .building-landing-page .comments-area .comment-form input[type="submit"],
+        .site-footer .widget .widget-title{
+            font-family: Big Shoulders Display;
+        }    
+    
+        .building-landing-page .banner .quote-form:after{
+            background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F9963B' viewBox='0 0 190 190'%3E%3Cpath d='M165.946,30.184a117.656,117.656,0,0,0-12.211,22.392c-.506,1.268-.875,4,.447,4.732,1.381.781,2.625-1.488,3.131-2.732,5.211-13,13.417-23.538,21.389-33.88,1.167-1.512,2.489-7.318-.6-6.488-14.039,3.732-28.156,7.366-42.546,7.659-2.528.049-4.511,7.781-1.633,7.732a131.54,131.54,0,0,0,26.1-3.512,345.464,345.464,0,0,0-62.5,43.125,403.166,403.166,0,0,0-62.477,68.3A450.648,450.648,0,0,0,5.913,183.293c-.719,1.293-1.4,3.952-.408,5.293,1.05,1.415,2.508-.268,3.131-1.366a426.263,426.263,0,0,1,53.707-76.03,369.007,369.007,0,0,1,66.152-58.785A324.27,324.27,0,0,1,165.946,30.184Z'/%3E%3C/svg%3E") center center no-repeat;
+        }
+
+        .building-landing-page .our-projects .col .blp-text-holder .btn-more:after{
+            background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F9963B' viewBox='0 0 97 92'%3E%3Cpath d='M34.5,44.974H52.106L50.468,40.5a32.055,32.055,0,0,0,9.032,5,32.055,32.055,0,0,0-9.032,5L52.1,46.026H34.5Z'/%3E%3C/svg%3E") center center no-repeat;
+            background-size: 7em;
+        }
+
+        .building-landing-page .testimonial .col blockquote:before{
+            background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F9963B' viewBox='0 0 512 512'%3E%3Cpath d='M464 256h-80v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8c-88.4 0-160 71.6-160 160v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48zm-288 0H96v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8C71.6 32 0 103.6 0 192v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48z'/%3E%3C/svg%3E") center center no-repeat;
+        }
+
+        .building-landing-page .clients-area .contact-detail address:before{
+            background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F9963B' viewBox='0 0 30 30'%3E%3Cpath d='M5,24.5H22.5V27H5Zm16.25-15a7.5,7.5,0,0,0-15,0c0,5.625,7.5,13.75,7.5,13.75S21.25,15.125,21.25,9.5Zm-12.5,0a5,5,0,0,1,10,0c0,2.663-2.6,6.825-5,9.888C11.35,16.337,8.75,12.162,8.75,9.5Zm5-2.5a2.5,2.5,0,1,0,2.5,2.5A2.507,2.507,0,0,0,13.75,7Z'/%3E%3C/svg%3E") center center no-repeat;
+        }
+
+        .building-landing-page .clients-area .contact-detail .email-link:before{
+            background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F9963B' viewBox='0 0 30 30'%3E%3Cpath d='M27,6.5A2.507,2.507,0,0,0,24.5,4H4.5A2.507,2.507,0,0,0,2,6.5v15A2.507,2.507,0,0,0,4.5,24h20A2.507,2.507,0,0,0,27,21.5Zm-2.5,0-10,6.237L4.5,6.5Zm0,15H4.5V9l10,6.25L24.5,9Z'/%3E%3C/svg%3E") center center no-repeat;
+        }
+
+        .building-landing-page .clients-area .contact-detail .tel-link:before{
+            background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F9963B' viewBox='0 0 30 30'%3E%3Cpath d='M7.72,5.667a16.417,16.417,0,0,0,.6,3.453l-1.6,1.6A19.767,19.767,0,0,1,5.707,5.667H7.72M20.867,21.693a17,17,0,0,0,3.467.6V24.28a20.569,20.569,0,0,1-5.067-1l1.6-1.587M9,3H4.333A1.337,1.337,0,0,0,3,4.333,22.665,22.665,0,0,0,25.667,27,1.337,1.337,0,0,0,27,25.667V21.013a1.337,1.337,0,0,0-1.333-1.333,15.209,15.209,0,0,1-4.76-.76,1.119,1.119,0,0,0-.413-.067,1.366,1.366,0,0,0-.947.387l-2.933,2.933a20.2,20.2,0,0,1-8.787-8.787l2.933-2.933a1.338,1.338,0,0,0,.333-1.36,15.147,15.147,0,0,1-.76-4.76A1.337,1.337,0,0,0,9,3Z'/%3E%3C/svg%3E") center center no-repeat;
+        }
+
+        .building-landing-page .clients-area .contact-detail .fax:before{
+            background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F9963B' viewBox='0 0 512 512'%3E%3Cpath d='M64 128H32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zm416 32V77.25c0-8.49-3.37-16.62-9.37-22.63L425.37 9.37c-6-6-14.14-9.37-22.63-9.37H160c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h320c17.67 0 32-14.33 32-32V192c0-17.67-14.33-32-32-32zM288 432c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-32c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v32zm0-128c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-32c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v32zm128 128c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-32c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v32zm0-128c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-32c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v32zm16-112H176V48h208v32c0 8.84 7.16 16 16 16h32v96z'/%3E%3C/svg%3E") center center no-repeat;
+        }
+
+        .building-landing-page .promotional-block2 .quote-form:after{
+            background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23F9963B' viewBox='0 0 190 190'%3E%3Cpath d='M165.946,30.184a117.656,117.656,0,0,0-12.211,22.392c-.506,1.268-.875,4,.447,4.732,1.381.781,2.625-1.488,3.131-2.732,5.211-13,13.417-23.538,21.389-33.88,1.167-1.512,2.489-7.318-.6-6.488-14.039,3.732-28.156,7.366-42.546,7.659-2.528.049-4.511,7.781-1.633,7.732a131.54,131.54,0,0,0,26.1-3.512,345.464,345.464,0,0,0-62.5,43.125,403.166,403.166,0,0,0-62.477,68.3A450.648,450.648,0,0,0,5.913,183.293c-.719,1.293-1.4,3.952-.408,5.293,1.05,1.415,2.508-.268,3.131-1.366a426.263,426.263,0,0,1,53.707-76.03,369.007,369.007,0,0,1,66.152-58.785A324.27,324.27,0,0,1,165.946,30.184Z'/%3E%3C/svg%3E") center center no-repeat;
+            background-size: 6em;
+        }
+        
+    
+    </style><noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript></head>
+
+<body data-rsssl=1 class="home wp-singular page-template page-template-template-home page-template-template-home-php page page-id-6348 wp-custom-logo wp-theme-construction-landing-page-pro theme-style-modern menu-sticky no-slider rightsidebar no-banner" itemscope itemtype="https://schema.org/WebPage">
+        <div id="fb-root"></div>
+        <script type="rocketlazyloadscript">(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+            <header class="mobile-site-header">
+        <div class="mobile-header-top">
+            <div class="container">
+                        <ul class="social-networks">
+    		                        <li>
+                            <a href="https://facebook.com/rdlvloerverwarming" target="_blank" rel="nofollow noopener">
+                                                                        <i class="fab fa-facebook-f"></i>
+                                                                </a>
+                        </li>
+                                                <li>
+                            <a href="https://twitter.com" target="_blank" rel="nofollow noopener">
+                                                                        <i class="fab fa-twitter"></i>
+                                                                </a>
+                        </li>
+                                                <li>
+                            <a href="https://instagram.com/rdlvloerverwarming" target="_blank" rel="nofollow noopener">
+                                                                        <i class="fab fa-instagram"></i>
+                                                                </a>
+                        </li>
+                            	</ul>
+        <!-- programming for social networks -->
+            </div> <!-- .container -->
+        </div><!-- .mobile-header-top -->
+        <div class="mobile-main-header">
+            <div class="container">
+                <div class="mobile-site-branding">
+                    <a href="https://www.loodgietersbedrijfrdl.nl/" class="custom-logo-link" rel="home" aria-current="page"><img data-rt-lazy="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer.png" loading="lazy"data-rt-lazy-set="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer.png 1100w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer-300x85.png 300w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer-1024x290.png 1024w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer-768x218.png 768w"data-object-fit="~"  width="1100" height="312"  class="custom-logo" alt="RDL | Loodgieters | Vloerverwarming | Dakdekkers" decoding="async" fetchpriority="high" srcset="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer.png 1100w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer-300x85.png 300w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer-1024x290.png 1024w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer-768x218.png 768w" sizes="(max-width: 1100px) 100vw, 1100px" /></a>                    <div class="mobile-text-logo">
+                             <p class="site-title"><a href="https://www.loodgietersbedrijfrdl.nl/" rel="home">
+                            RDL | Loodgieters | Vloerverwarming | Dakdekkers</a></p>
+                                                          <p class="site-description">Uw betrouwbare loodgieter aan huis.</p>
+                                                  </div><!-- .mobile-text-logo -->
+                </div><!-- .mobile-site-branding -->
+                <div class="mobile-menu-opener">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div> <!-- .mobile-menu-opener -->
+            </div> <!-- .container -->
+        </div> <!-- .mobile-main-header -->
+        <div class="mobile-menu">
+            <nav id="mobile-site-navigation" class="mobile-main-navigation" role="navigation"><!-- navigation here -->
+                <div class="menu-main-container"><ul id="primary-menu" class="menu"><li id="menu-item-6440" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6348 current_page_item menu-item-6440"><a href="https://www.loodgietersbedrijfrdl.nl/" aria-current="page">HOME</a></li>
+<li id="menu-item-6438" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6438"><a href="https://www.loodgietersbedrijfrdl.nl/diensten/">DIENSTEN</a>
+<ul class="sub-menu">
+	<li id="menu-item-6450" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6450"><a href="https://www.loodgietersbedrijfrdl.nl/verstopping/">Verstopping</a></li>
+	<li id="menu-item-6451" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6451"><a href="https://www.loodgietersbedrijfrdl.nl/service/badkamer-verbouwen-2/">Badkamer Verbouwen</a></li>
+	<li id="menu-item-6447" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6447"><a href="https://www.loodgietersbedrijfrdl.nl/sanitair/">Sanitair</a></li>
+	<li id="menu-item-6448" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6448"><a href="https://www.loodgietersbedrijfrdl.nl/toilet-verbouwen/">Toilet Verbouwen</a></li>
+	<li id="menu-item-6446" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6446"><a href="https://www.loodgietersbedrijfrdl.nl/dakdekker/">Dakdekker</a></li>
+	<li id="menu-item-6444" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6444"><a href="https://www.loodgietersbedrijfrdl.nl/centrale-verwarming/">Centrale Verwarming</a></li>
+	<li id="menu-item-6445" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6445"><a href="https://www.loodgietersbedrijfrdl.nl/dak-lease/">Dak Lease</a></li>
+</ul>
+</li>
+<li id="menu-item-6441" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6441"><a href="https://www.loodgietersbedrijfrdl.nl/over-ons/">OVER RDL</a></li>
+<li id="menu-item-6442" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6442"><a href="https://www.loodgietersbedrijfrdl.nl/prijsopgave-offerte/">OFFERTE AANVRAGEN</a></li>
+<li id="menu-item-6443" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6443"><a href="https://www.loodgietersbedrijfrdl.nl/contact/">CONTACT OPNEMEN</a></li>
+<li id="menu-item-6706" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6706"><a href="https://www.loodgietersbedrijfrdl.nl/monteursomgeving/">INLOG MONTEUR</a>
+<ul class="sub-menu">
+	<li id="menu-item-6569" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6569"><a href="https://www.loodgietersbedrijfrdl.nl/bestellingen/">BESTELLINGEN</a></li>
+	<li id="menu-item-6705" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6705"><a href="https://www.loodgietersbedrijfrdl.nl/rdl-werkbonnen/">RDL WERKBONNEN</a></li>
+	<li id="menu-item-6630" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6630"><a href="https://www.loodgietersbedrijfrdl.nl/monteursomgeving/">OPNAME BONNEN</a></li>
+	<li id="menu-item-6880" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6880"><a href="https://www.loodgietersbedrijfrdl.nl/verlof-aanvraag/">VERLOF AANVRAAG</a></li>
+</ul>
+</li>
+</ul></div>            </nav><!-- #site-navigation -->
+                            <a href="https://www.loodgietersbedrijfrdl.nl/prijsopgave-offerte/" class="btn-quote">Vraag een offerte aan</a>
+                        
+            <ul class="header-info">
+                 
+                        <li>                                   
+                            <i class="fa fa-phone" aria-hidden="true"></i>                            Bel ons op<br/>
+                            <a href="tel:0727855410">0727855410</a>
+                        </li>
+                             
+                        <li>                               
+                            <i class="fa fa-envelope" aria-hidden="true"></i>Onze email<br/>
+                            <a href="mailto:info@loodgietersbedrijfrdl.nl">info@loodgietersbedrijfrdl.nl</a>
+                        </li>
+                          
+            </ul>
+            
+                                    <div class="col">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>                            <div class="text">
+                                <strong>VLOERVERWARMING // RENODEXX</strong>
+                                <span></span>
+                            </div>
+                        </div>                    
+                                                <div class="col">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>                            <div class="text">
+                                <strong>LOODGIETERSWERKZAAMHEDEN</strong>
+                                <span></span>
+                            </div>
+                        </div>                    
+                                </div><!-- mobile-menu here -->
+    </header> <!-- .mobile-site-header --> 
+    <div id="page" class="site ">
+	
+    
+<header id="masthead" class="site-header header-4" role="banner" itemscope itemtype="https://schema.org/WPHeader">
+		<div class="header-holder">
+		<div class="top-bar">
+			<div class="container">
+				<div class="contact-info">                
+				                                    
+                <span>
+				<i class="fa fa-phone" aria-hidden="true"></i>                     Bel ons op                    <a href="tel:0727855410"><b>0727855410</b></a>
+                </span>
+                                                            
+				                                    
+				<span>
+				<i class="fa fa-envelope" aria-hidden="true"></i>                   	<a href="mailto:info@loodgietersbedrijfrdl.nl">info@loodgietersbedrijfrdl.nl</a>
+				</span>
+                                
+				</div>				
+				        <ul class="social-networks">
+    		                        <li>
+                            <a href="https://facebook.com/rdlvloerverwarming" target="_blank" rel="nofollow noopener">
+                                                                        <i class="fab fa-facebook-f"></i>
+                                                                </a>
+                        </li>
+                                                <li>
+                            <a href="https://twitter.com" target="_blank" rel="nofollow noopener">
+                                                                        <i class="fab fa-twitter"></i>
+                                                                </a>
+                        </li>
+                                                <li>
+                            <a href="https://instagram.com/rdlvloerverwarming" target="_blank" rel="nofollow noopener">
+                                                                        <i class="fab fa-instagram"></i>
+                                                                </a>
+                        </li>
+                            	</ul>
+                                            
+			</div>
+		</div>
+		<div class="header-t">
+			<div class="container">
+					<div class="site-branding" itemscope itemtype="https://schema.org/Organization">				
+                        <a href="https://www.loodgietersbedrijfrdl.nl/" class="custom-logo-link" rel="home" aria-current="page"><img data-rt-lazy="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer.png" loading="lazy"data-rt-lazy-set="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer.png 1100w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer-300x85.png 300w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer-1024x290.png 1024w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer-768x218.png 768w"data-object-fit="~"  width="1100" height="312"  class="custom-logo" alt="RDL | Loodgieters | Vloerverwarming | Dakdekkers" decoding="async" srcset="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer.png 1100w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer-300x85.png 300w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer-1024x290.png 1024w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2024/04/cropped-LOGO2023RDLVloer-768x218.png 768w" sizes="(max-width: 1100px) 100vw, 1100px" /></a>								<div class="text-logo">
+																			<h1 class="site-title" itemprop="name"><a href="https://www.loodgietersbedrijfrdl.nl/" rel="home" itemprop="url">RDL | Loodgieters | Vloerverwarming | Dakdekkers</a></h1>
+																			<p class="site-description" itemprop="description">Uw betrouwbare loodgieter aan huis.</p>
+																	</div>
+							                    </div><!-- .site-branding -->              
+                				<a href="https://www.loodgietersbedrijfrdl.nl/prijsopgave-offerte/" class="request-link">Vraag een offerte aan</a>
+                                
+				<div class="right-panel">
+										<div class="col">
+					<i class="fa fa-check-circle-o" aria-hidden="true"></i>						<div class="text">
+							<strong>VLOERVERWARMING // RENODEXX</strong>
+							<span></span>
+						</div>
+					</div>                    
+                    					<div class="col">
+					<i class="fa fa-check-circle-o" aria-hidden="true"></i>						<div class="text">
+							<strong>LOODGIETERSWERKZAAMHEDEN</strong>
+							<span></span>
+						</div>
+					</div>                    
+                    				</div>
+			</div>
+		</div>
+        </div>
+        
+        <div class="sticky-holder"></div>
+		<div class="nav-holder">
+			<div class="container">
+				            <nav id="site-navigation" class="main-navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
+                <div class="menu-main-container"><ul id="primary-menu" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6348 current_page_item menu-item-6440"><a href="https://www.loodgietersbedrijfrdl.nl/" aria-current="page">HOME</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6438"><a href="https://www.loodgietersbedrijfrdl.nl/diensten/">DIENSTEN</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6450"><a href="https://www.loodgietersbedrijfrdl.nl/verstopping/">Verstopping</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6451"><a href="https://www.loodgietersbedrijfrdl.nl/service/badkamer-verbouwen-2/">Badkamer Verbouwen</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6447"><a href="https://www.loodgietersbedrijfrdl.nl/sanitair/">Sanitair</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6448"><a href="https://www.loodgietersbedrijfrdl.nl/toilet-verbouwen/">Toilet Verbouwen</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6446"><a href="https://www.loodgietersbedrijfrdl.nl/dakdekker/">Dakdekker</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6444"><a href="https://www.loodgietersbedrijfrdl.nl/centrale-verwarming/">Centrale Verwarming</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6445"><a href="https://www.loodgietersbedrijfrdl.nl/dak-lease/">Dak Lease</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6441"><a href="https://www.loodgietersbedrijfrdl.nl/over-ons/">OVER RDL</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6442"><a href="https://www.loodgietersbedrijfrdl.nl/prijsopgave-offerte/">OFFERTE AANVRAGEN</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6443"><a href="https://www.loodgietersbedrijfrdl.nl/contact/">CONTACT OPNEMEN</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6706"><a href="https://www.loodgietersbedrijfrdl.nl/monteursomgeving/">INLOG MONTEUR</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6569"><a href="https://www.loodgietersbedrijfrdl.nl/bestellingen/">BESTELLINGEN</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6705"><a href="https://www.loodgietersbedrijfrdl.nl/rdl-werkbonnen/">RDL WERKBONNEN</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6630"><a href="https://www.loodgietersbedrijfrdl.nl/monteursomgeving/">OPNAME BONNEN</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6880"><a href="https://www.loodgietersbedrijfrdl.nl/verlof-aanvraag/">VERLOF AANVRAAG</a></li>
+</ul>
+</li>
+</ul></div>            </nav>		
+        												
+    </nav>
+			</div>
+		</div>
+	</header>
+	<section id="counters_section" class="counter-section" style="background: url(https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2015/02/designbadkamer.jpg) no-repeat; background-size: cover; background-attachment: fixed;">
+		<div class="container">
+            <header class="header wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s"><h2 class="main-title">Welkom bij RDL Loodgieters !</h2><p>Dit is een greep uit onze aantallen van projecten.<br />
+Uiteraard zijn er tal van andere kleinere projecten die wij hebben uitgevoerd.<br />
+Voor meer informatie neemt u vrijblijvend contact op! </p>
+</header>			        <div class="row">			            
+									                    
+				                <div class="col wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s">
+									<div class="box">
+																				<div class="icon-holder">
+																									<i class="fa fas fa-angle-double-down"></i>
+																							</div>
+																				<strong class="number">6557</strong>										<span>Projecten</span>									</div>
+								</div>                    
+											                    
+				                <div class="col wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s">
+									<div class="box">
+																				<div class="icon-holder">
+																									<i class="fa fas fa-angle-double-down"></i>
+																							</div>
+																				<strong class="number">2389</strong>										<span>Badkamer projecten</span>									</div>
+								</div>                    
+											                    
+				                <div class="col wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s">
+									<div class="box">
+																				<div class="icon-holder">
+																									<i class="fa fas fa-angle-double-down"></i>
+																							</div>
+																				<strong class="number">1244</strong>										<span>cv-ketel installaties</span>									</div>
+								</div>                    
+											                    
+				                <div class="col wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s">
+									<div class="box">
+																				<div class="icon-holder">
+																									<i class="fa fas fa-angle-double-down"></i>
+																							</div>
+																				<strong class="number">2342</strong>										<span>Vloerverwarmingen</span>									</div>
+								</div>                    
+											        </div>
+     				            
+		</div>
+	</section>
+	
+<section id="services_section" class="our-services"style="background: url(https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2015/03/dakdekker-Alkmaar.jpg); background-size: cover; background-attachment: fixed;">        <div class="container">
+                
+                <header class="header wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s">                
+                    <h2 class="main-title">Een aantal van onze diensten</h2><p>Uiteraard beheren wij tal van werkzaamheden die wij hier niet kunnen laten zien, vraag naar de mogelijkheden die wij u kunnen bieden.</p>
+                </header>
+        
+                                    <div class="row">
+                                                    <div class="col wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s">                        
+                                <div class="holder">
+                                
+                                                                            <div class="icon-holder"><img data-rt-lazy="image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" loading="lazy"data-object-fit="~"  width="360" height="259"  class="attachment-construction-landing-page-about-portfolio size-construction-landing-page-about-portfolio wp-post-image" alt="" itemprop="image" decoding="async" srcset="" sizes="(max-width: 360px) 100vw, 360px" data-layzr="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2013/12/cropped-Depositphotos_22620531_original-e1424273251730.jpg" data-loader="none" data-layzr-srcset="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2013/12/cropped-Depositphotos_22620531_original-e1424273251730.jpg 1084w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2013/12/cropped-Depositphotos_22620531_original-e1424273251730-300x216.jpg 300w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2013/12/cropped-Depositphotos_22620531_original-e1424273251730-768x553.jpg 768w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2013/12/cropped-Depositphotos_22620531_original-e1424273251730-1024x737.jpg 1024w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2013/12/cropped-Depositphotos_22620531_original-e1424273251730-600x432.jpg 600w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2013/12/cropped-Depositphotos_22620531_original-e1424273251730-222x160.jpg 222w" /></div>
+                                                                        
+                                    <h3 class="title"><a href="https://www.loodgietersbedrijfrdl.nl/service/loodgieterswerk/">Loodgieterswerk</a></h3>
+                                    
+                                    <p>Uw professionele loodgieter RDL Wanneer u een nieuw huis in Alkmaar gekocht heeft, of als u plannen maakt voor een verbouwing&hellip;</p>
+                                
+                                </div>
+                            </div>
+                                                        <div class="col wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s">                        
+                                <div class="holder">
+                                
+                                                                            <div class="icon-holder"><img data-rt-lazy="image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" loading="lazy"data-object-fit="~"  width="360" height="276"  class="attachment-construction-landing-page-about-portfolio size-construction-landing-page-about-portfolio wp-post-image" alt="badkamer verbouwen" itemprop="image" decoding="async" data-layzr="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2021/11/254636500_435992594610869_617246488790254970_n-360x276.jpg" data-loader="none" /></div>
+                                                                        
+                                    <h3 class="title"><a href="https://www.loodgietersbedrijfrdl.nl/service/badkamer-verbouwen-2/">Badkamer verbouwen</a></h3>
+                                    
+                                    <p>"Wilt u uw toilet of badkamer verbouwen en nog geen idee wat u wilt? Laat ons u verrassen met onze&hellip;</p>
+                                
+                                </div>
+                            </div>
+                                                        <div class="col wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s">                        
+                                <div class="holder">
+                                
+                                                                            <div class="icon-holder"><img data-rt-lazy="image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" loading="lazy"data-object-fit="~"  width="338" height="224"  class="attachment-construction-landing-page-about-portfolio size-construction-landing-page-about-portfolio wp-post-image" alt="" itemprop="image" decoding="async" srcset="" sizes="(max-width: 338px) 100vw, 338px" data-layzr="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2017/01/cropped-RDLdakdekkers-2.jpg" data-loader="none" data-layzr-srcset="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2017/01/cropped-RDLdakdekkers-2.jpg 338w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2017/01/cropped-RDLdakdekkers-2-300x199.jpg 300w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2017/01/cropped-RDLdakdekkers-2-241x160.jpg 241w" /></div>
+                                                                        
+                                    <h3 class="title"><a href="https://www.loodgietersbedrijfrdl.nl/service/dakdekker/">Dakdekker</a></h3>
+                                    
+                                    <p>Voor een Dakdekker zit u goed bij RDL Dakdekkers &amp; Loodgieters 072-7855410  Onze dakdekkers hebben jarenlange ervaring Betrouwbaarheid en kwaliteit&hellip;</p>
+                                
+                                </div>
+                            </div>
+                              
+                    </div>                            
+                    
+                            
+                                    <div class="btn-holder"><a href="https://www.loodgietersbedrijfrdl.nl/diensten" class="btn-view">Lees meer over onze diensten</a></div>        
+                        
+            
+        </div>
+    </section>
+
+        <section class="price-compare" id="pricing_section" >
+    	<div class="container">
+            <header class="header wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s"><h2 class="main-title">Werkzaamheden/Diensten</h2><p>Wij kunnen diverse pakketten aanbieden.</p>
+</header>        			<div class="column-holder">
+                        				
+                            <div class="col ">
+                                <div class="box wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s">
+                                                    					<div class="top-header">
+                						<p>CV-ketel onderhoud</p>
+                						<h3>Jaarlijks onderhoud </h3>                					</div>
+                					<h4 class="price">85,-</h4>                                    <ul class='plan-list'><li>Het onderhouden van de cv-ketel.</li><li>-Schoonmaken</li><li>-Controleren</li><li>-Instellen/tunen</li></ul>                    
+                                                    					<div class="btn-holder">
+                						<a href="" class="btn-buy">Meer info</a>
+                					</div>
+                                                    				</div>
+                            </div>
+                            
+            							
+                            <div class="col ">
+                                <div class="box wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s">
+                                                    					<div class="top-header">
+                						<p>Dak/gootlekkage</p>
+                						<h3>Buitenshuis lekkage</h3>                					</div>
+                					<h4 class="price">95,-</h4>                                    <ul class='plan-list'><li>-Inclusief voorrijdkosten. </li><li>-Inclusief 1 uur </li><li>-Exclusief materialen.</li><li>-Per extra uur 55,- incl btw</li></ul>                    
+                                                    					<div class="btn-holder">
+                						<a href="#estimate" class="btn-buy">Meer info</a>
+                					</div>
+                                                    				</div>
+                            </div>
+                            
+            							
+                            <div class="col ">
+                                <div class="box wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s">
+                                                    					<div class="top-header">
+                						<p>Water/gas lekkage</p>
+                						<h3>Binnenshuis lekkage</h3>                					</div>
+                					<h4 class="price">95,-</h4>                                    <ul class='plan-list'><li>-Inclusief voorrijdkosten.</li><li>-Inclusief 1 uur</li><li>-Exclusief materialen.</li><li>-Per extra uur 55,- incl btw</li></ul>                    
+                                                    					<div class="btn-holder">
+                						<a href="" class="btn-buy">Meer info</a>
+                					</div>
+                                                    				</div>
+                            </div>
+                            
+            							
+                            <div class="col recommended">
+                                <div class="box wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s">
+                                    <div class="popular-tag-m"><div class="popular-tag">Popular</div></div>                					<div class="top-header">
+                						<p>Aanbieding cv-ketel</p>
+                						<h3>Monteren nieuwe cv-ketel</h3>                					</div>
+                					<h4 class="price">1350,-</h4>                                    <ul class='plan-list'><li>-Het installeren van een nieuwe cv-ketel.</li><li>-De ketel is een intergas cw4</li><li>-Alle appendages worden vervangen.</li></ul>                    
+                                                    					<div class="btn-holder">
+                						<a href="" class="btn-buy">Meer info</a>
+                					</div>
+                                                    				</div>
+                            </div>
+                            
+            			                 	
+        			</div>
+                        	</div>
+    </section>
+        <section class="about" id="about_section">
+        <div class="container">
+            <header class="header wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s"><h2 class="main-title">Over het ons bedrijf RDL Vloerverwarming / Loodgieters / Dakdekkers /</h2><p>Wij zijn uw specialist in alle voorkomende loodgieterwerkzaamheden.<br />
+Wanneer u in uw huis of bedrijf geconfronteerd wordt met een vervelende lekkage, of bijvoorbeeld een verstopping van uw toilet, dan is het plezierig wanneer er snel een vakman ter plaatse kan zijn die uw problemen blijvend oplost. Bel daarom in voorkomende gevallen direct met de loodgieter in Alkmaar.</p>
+<p>RDL Loodgieters elke dag voor u klaar met deskundig uitgevoerde werkzaamheden en een goed advies! Ook in het weekend en tijdens de feestdagen kunt u rekenen op een snelle service wanneer u bijvoorbeeld een storing aan uw CV installatie hebt. Zo zit u er te allen tijde snel weer warm bij en kunt u genieten van een behaaglijke sfeer in uw woning of bedrijfspand!</p>
+<p>Uw professionele loodgieter RDL</p>
+<p>Wanneer u een nieuw huis in Alkmaar gekocht heeft, of als u plannen maakt voor een verbouwing van uw bestaande woning, dan is het inschakelen van een expert een goed idee.</p>
+<p>Bij het plaatsen van nieuw sanitair, leidingwerk of de montage van een nieuwe CV installatie is de expertise van een echte professional van belang. Ook voor het vernieuwen van uw dakgoten of het dak zelf, is een geschoolde loodgieter in Alkmaar<br />
+ de aangewezen partij voor het uitvoeren van deze werkzaamheden.</p>
+</header>                    <div class="row">
+                     
+    							<div class="col wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s">                        
+                                <div class="img-holder">
+                                <a href="https://www.loodgietersbedrijfrdl.nl/loodgieter-alkmaar-ook-voor-spoed/">
+    							  <img data-rt-lazy="image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" loading="lazy"data-object-fit="~"  width="360" height="276"  class="attachment-construction-landing-page-about-portfolio size-construction-landing-page-about-portfolio wp-post-image" alt="RDL-loodgieter in alkmaar" itemprop="image" decoding="async" data-layzr="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2013/06/rdlBus-e1637291130999-360x276.jpg" data-loader="none" />                            
+                                    </a>
+                                </div>
+                                <div class="text-holder">
+                                    <h3 class="title"><a href="https://www.loodgietersbedrijfrdl.nl/loodgieter-alkmaar-ook-voor-spoed/">Loodgieter Alkmaar, ook voor spoed!</a></h3>
+                                    <p>Op zoek naar een vakkundige loodgieter in Alkmaar? Voor gedegen loodgieterswerk ben je bij ons aan het goede adres. Wij&hellip;</p>
+                                </div>
+    				        </div>
+    			          
+    							<div class="col wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s">                        
+                                <div class="img-holder">
+                                <a href="https://www.loodgietersbedrijfrdl.nl/dakdekker-alkmaar/">
+    							  <img data-rt-lazy="image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" loading="lazy"data-object-fit="~"  width="338" height="224"  class="attachment-construction-landing-page-about-portfolio size-construction-landing-page-about-portfolio wp-post-image" alt="" itemprop="image" decoding="async" srcset="" sizes="(max-width: 338px) 100vw, 338px" data-layzr="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2017/01/cropped-RDLdakdekkers-2.jpg" data-loader="none" data-layzr-srcset="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2017/01/cropped-RDLdakdekkers-2.jpg 338w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2017/01/cropped-RDLdakdekkers-2-300x199.jpg 300w, https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2017/01/cropped-RDLdakdekkers-2-241x160.jpg 241w" />                            
+                                    </a>
+                                </div>
+                                <div class="text-holder">
+                                    <h3 class="title"><a href="https://www.loodgietersbedrijfrdl.nl/dakdekker-alkmaar/">Dakdekker Alkmaar</a></h3>
+                                    <p>Dakdekker Alkmaar. Dakdekker Alkmaar heb jarenlang ervaring in dakreparatie, dakvervanging en daklekkage. Betrouwbaarheid en kwaliteit staan bij ons hoog in&hellip;</p>
+                                </div>
+    				        </div>
+    			          
+    							<div class="col wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s">                        
+                                <div class="img-holder">
+                                <a href="https://www.loodgietersbedrijfrdl.nl/aanbiedingen/">
+    							  <img data-rt-lazy="image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" loading="lazy"data-object-fit="~"  width="360" height="240"  class="attachment-construction-landing-page-about-portfolio size-construction-landing-page-about-portfolio wp-post-image" alt="" itemprop="image" decoding="async" data-layzr="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2013/12/Depositphotos_3338844_original-e1424296760114.jpg" data-loader="none" />                            
+                                    </a>
+                                </div>
+                                <div class="text-holder">
+                                    <h3 class="title"><a href="https://www.loodgietersbedrijfrdl.nl/aanbiedingen/">Aanbiedingen</a></h3>
+                                    <p>Aanbiedingen van de maand november/December.  Dit zijn weer een aantal aanbiedingen. </p>
+                                </div>
+    				        </div>
+    			                             </div>
+                        </div>
+        
+                
+    </section>
+    	<section class="our-clients" id="clients_section">
+	    <div class="container">
+	        				<header class="header">
+					<strong>Onze partners in crime</strong>
+				</header>
+	        		   
+	        		        <div class="row">
+		            <div class="col"><img data-rt-lazy="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2011/09/cropped-Untitled-18.png" loading="lazy"data-object-fit="~"  ></div><div class="col"><img data-rt-lazy="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2011/09/cropped-Untitled-12.png" loading="lazy"data-object-fit="~"  ></div><div class="col"><img data-rt-lazy="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2011/09/cropped-Untitled-16.png" loading="lazy"data-object-fit="~"  ></div><div class="col"><img data-rt-lazy="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2015/07/logo-mollie.png" loading="lazy"data-object-fit="~"  ></div><div class="col"><img data-rt-lazy="https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2013/06/AZAlkmaar.png" loading="lazy"data-object-fit="~"  ></div><div class="col"></div>                  
+		        </div>
+	        	    
+	    </div>    
+	</section>
+	    <section id="freestimate_section" class="promotional-block2" style="background: url(https://www.loodgietersbedrijfrdl.nl/wp-content/uploads/2021/11/253604923_435992607944201_8373670557175212156_n.jpg); background-size: cover; background-attachment: fixed;">
+        <div class="container">
+            <header class="header wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0s"><h2 class="main-title">Vraag hier direct uw dienst of offerte aan.</h2><p>Wij nemen indien mogelijk binnen kantoortijden direct contact met u op.</p>
+</header>     
+    	</div>
+    </section>
+       
+	<footer id="colophon" class="site-footer" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
+	            
+		<div class="footer-t">
+			<div class="container">
+				<div class="row">
+					    					<div class="column">
+    					   <section id="block-14" class="widget widget_block"><p>		<div itemscope itemtype="http://schema.org/Organization">
+			<span itemprop="name" style="display:none">
+				Home			</span>
+			<div class="star-rating"><span class="screen-reader-text">4,2 rating based on 12.345 ratings</span><div class="star star-full" aria-hidden="true"></div><div class="star star-full" aria-hidden="true"></div><div class="star star-full" aria-hidden="true"></div><div class="star star-full" aria-hidden="true"></div><div class="star star-half" aria-hidden="true"></div></div>		    Overall rating:			<span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+				<strong>
+					<span class="value" itemprop="ratingValue">4.2</span>
+				</strong> out of				<strong><span itemprop="bestRating">5</span></strong> based on				<span class="votes" itemprop="reviewCount">
+					11				</span> reviews.			</span>
+			<div itemprop="review" itemscope itemtype="http://schema.org/Review">
+				<span itemprop="author" itemscope itemtype="https://schema.org/Person" style="display: none;">
+					<span itemprop="name">Anonymous</span>
+				</span>
+			</div>
+		</div>
+	</p>
+</section><section id="construction_landing_page_facebook_page_widget-3" class="widget widget_construction_landing_page_facebook_page_widget">        <div class="construction-landing-page-facebook-page-box">
+        <h2 class="widget-title" itemprop="name">Facebook pagina </h2>        <div class="fb-page" data-href="http://facebook.com/rdlvloerverwarming" data-height="100" data-width="500" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false" data-small-header="false" data-tabs="timeline" ></div>
+        </div>
+        
+        </section>	
+    					</div>
+                        				
+                                            <div class="column">
+    					   	
+    					</div>
+                                        
+                                            <div class="column">
+    					   <section id="construction_landing_page_social_links-3" class="widget widget_construction_landing_page_social_links"><h2 class="widget-title" itemprop="name">Social knoppen</h2>            <ul class="social-networks">
+				                <li><a href="https://www.facebook.com/RDLVloerverwarming" target="_blank" title="Facebook" ><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+				                <li><a href="https://www.instagram.com/rdlvloerverwarming/" target="_blank" title="Instagram" ><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="https://nl.pinterest.com/" target="_blank" title="Pinterest" ><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+				                <li><a href="http://youtube.com/vloerverwarmingnh" target="_blank" title="YouTube" ><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                			</ul>
+        </section><section id="block-5" class="widget widget_block">
+<ul class="wp-block-list"><li>RDL Groep vof </li><li>Otterkoog 7A </li><li>1822BW Alkmaar</li><li>072 7855410</li></ul>
+</section>	
+    					</div>
+                    				</div>
+			</div>
+		</div>
+			
+    <div class="site-info"><div class="container"><span class="copyright">Powered by RDL GROEP VOF 2000/2024</span><span class="by"></span></div></div>        
+	</footer>
+    
+    <div id="rara-top"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
+
+    <div class="overlay-ft-wrap"></div>
+    
+</div><!-- #page -->
+
+<script type="rocketlazyloadscript" data-rocket-type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/construction-landing-page-pro/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<!-- analytics-code google analytics manual tracking code --><script type="rocketlazyloadscript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76214126-1', 'auto');
+  ga('send', 'pageview');
+
+</script><!--  --><style id="construction-landing-page-pro-local-webfonts">@font-face{font-family:'PT Sans';font-style:normal;font-weight:700;src:local('PT Sans Bold'),local('PTSans-Bold'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/ptsans/jizfRExUiTo99u79B_mh4OmnLD0Z4zM.ttf) format('truetype');}@font-face{font-family:'PT Sans';font-style:normal;font-weight:400;src:local('PT Sans Regular'),local('PTSans-Regular'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/ptsans/jizaRExUiTo99u79P0WOxOGMMDQ.ttf) format('truetype');}@font-face{font-family:'PT Sans';font-style:italic;font-weight:400;src:local('PT Sans Italic'),local('PTSans-Italic'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/ptsans/jizYRExUiTo99u79D0eEwMOJIDQA-g.ttf) format('truetype');}@font-face{font-family:'PT Sans';font-style:italic;font-weight:700;src:local('PT Sans Bold Italic'),local('PTSans-BoldItalic'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/ptsans/jizdRExUiTo99u79D0e8fOytKB8c8zMrig.ttf) format('truetype');}@font-face{font-family:'Outfit';font-style:normal;font-weight:100;src:local('Outfit Thin'),local('Outfit-Thin'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/outfit/QGYyz_MVcBeNP4NjuGObqx1XmO1I4TC0C4G-EiAou6Y.ttf) format('truetype');}@font-face{font-family:'Outfit';font-style:normal;font-weight:200;src:local('Outfit Extra-Light'),local('Outfit-ExtraLight'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/outfit/QGYyz_MVcBeNP4NjuGObqx1XmO1I4bC1C4G-EiAou6Y.ttf) format('truetype');}@font-face{font-family:'Outfit';font-style:normal;font-weight:300;src:local('Outfit Light'),local('Outfit-Light'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/outfit/QGYyz_MVcBeNP4NjuGObqx1XmO1I4W61C4G-EiAou6Y.ttf) format('truetype');}@font-face{font-family:'Outfit';font-style:normal;font-weight:500;src:local('Outfit Medium'),local('Outfit-Medium'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/outfit/QGYyz_MVcBeNP4NjuGObqx1XmO1I4QK1C4G-EiAou6Y.ttf) format('truetype');}@font-face{font-family:'Outfit';font-style:normal;font-weight:600;src:local('Outfit Semi-Bold'),local('Outfit-SemiBold'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/outfit/QGYyz_MVcBeNP4NjuGObqx1XmO1I4e6yC4G-EiAou6Y.ttf) format('truetype');}@font-face{font-family:'Outfit';font-style:normal;font-weight:700;src:local('Outfit Bold'),local('Outfit-Bold'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/outfit/QGYyz_MVcBeNP4NjuGObqx1XmO1I4deyC4G-EiAou6Y.ttf) format('truetype');}@font-face{font-family:'Outfit';font-style:normal;font-weight:800;src:local('Outfit Extra-Bold'),local('Outfit-ExtraBold'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/outfit/QGYyz_MVcBeNP4NjuGObqx1XmO1I4bCyC4G-EiAou6Y.ttf) format('truetype');}@font-face{font-family:'Outfit';font-style:normal;font-weight:900;src:local('Outfit Black'),local('Outfit-Black'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/outfit/QGYyz_MVcBeNP4NjuGObqx1XmO1I4ZmyC4G-EiAou6Y.ttf) format('truetype');}@font-face{font-family:'Outfit';font-style:normal;font-weight:400;src:local('Outfit Regular'),local('Outfit-Regular'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/outfit/QGYyz_MVcBeNP4NjuGObqx1XmO1I4TC1C4G-EiAou6Y.ttf) format('truetype');}@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:100;src:local('Big Shoulders Display Thin'),local('BigShouldersDisplay-Thin'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/bigshouldersdisplay/fC1MPZJEZG-e9gHhdI4-NBbfd2ys3SjJCx12wPgf9g-_3F0YdY86JF46SRP4yZQ.ttf) format('truetype');}@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:200;src:local('Big Shoulders Display Extra-Light'),local('BigShouldersDisplay-ExtraLight'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/bigshouldersdisplay/fC1MPZJEZG-e9gHhdI4-NBbfd2ys3SjJCx12wPgf9g-_3F0YdQ87JF46SRP4yZQ.ttf) format('truetype');}@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:300;src:local('Big Shoulders Display Light'),local('BigShouldersDisplay-Light'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/bigshouldersdisplay/fC1MPZJEZG-e9gHhdI4-NBbfd2ys3SjJCx12wPgf9g-_3F0YddE7JF46SRP4yZQ.ttf) format('truetype');}@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:500;src:local('Big Shoulders Display Medium'),local('BigShouldersDisplay-Medium'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/bigshouldersdisplay/fC1MPZJEZG-e9gHhdI4-NBbfd2ys3SjJCx12wPgf9g-_3F0Ydb07JF46SRP4yZQ.ttf) format('truetype');}@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:600;src:local('Big Shoulders Display Semi-Bold'),local('BigShouldersDisplay-SemiBold'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/bigshouldersdisplay/fC1MPZJEZG-e9gHhdI4-NBbfd2ys3SjJCx12wPgf9g-_3F0YdVE8JF46SRP4yZQ.ttf) format('truetype');}@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:700;src:local('Big Shoulders Display Bold'),local('BigShouldersDisplay-Bold'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/bigshouldersdisplay/fC1MPZJEZG-e9gHhdI4-NBbfd2ys3SjJCx12wPgf9g-_3F0YdWg8JF46SRP4yZQ.ttf) format('truetype');}@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:800;src:local('Big Shoulders Display Extra-Bold'),local('BigShouldersDisplay-ExtraBold'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/bigshouldersdisplay/fC1MPZJEZG-e9gHhdI4-NBbfd2ys3SjJCx12wPgf9g-_3F0YdQ88JF46SRP4yZQ.ttf) format('truetype');}@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:900;src:local('Big Shoulders Display Black'),local('BigShouldersDisplay-Black'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/bigshouldersdisplay/fC1MPZJEZG-e9gHhdI4-NBbfd2ys3SjJCx12wPgf9g-_3F0YdSY8JF46SRP4yZQ.ttf) format('truetype');}@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:400;src:local('Big Shoulders Display Regular'),local('BigShouldersDisplay-Regular'),url(//www.loodgietersbedrijfrdl.nl/wp-content/uploads/webfonts/bigshouldersdisplay/fC1MPZJEZG-e9gHhdI4-NBbfd2ys3SjJCx12wPgf9g-_3F0YdY87JF46SRP4yZQ.ttf) format('truetype');}</style><script type="rocketlazyloadscript" id="flexslider-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/plugins/cherry-plugin/lib/js/FlexSlider/jquery.flexslider-min.js" defer></script>
+<script id="cherry-plugin-js-extra">
+var items_custom = [[0,1],[480,2],[768,3],[980,4],[1170,5]];
+//# sourceURL=cherry-plugin-js-extra
+</script>
+<script type="rocketlazyloadscript" data-minify="1" id="cherry-plugin-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/cache/min/1/wp-content/plugins/cherry-plugin/includes/js/cherry-plugin.js?ver=1764153149" defer></script>
+<script type="rocketlazyloadscript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+//# sourceURL=rocket-browser-checker-js-after
+</script>
+<script id="rocket-preload-links-js-extra">
+var RocketPreloadLinksConfig = {"excludeUris":"/(.+/)?feed/?.+/?|/(?:.+/)?embed/|/(index\\.php/)?wp\\-json(/.*|$)|/wp-admin/|/logout/|/wp-login.php","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https://www.loodgietersbedrijfrdl.nl","onHoverDelay":"100","rateThrottle":"3"};
+//# sourceURL=rocket-preload-links-js-extra
+</script>
+<script type="rocketlazyloadscript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+
+//# sourceURL=rocket-preload-links-js-after
+</script>
+<script type="rocketlazyloadscript" id="all-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/themes/construction-landing-page-pro/js/all.min.js" defer></script>
+<script type="rocketlazyloadscript" id="jquery-fancybox-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/themes/construction-landing-page-pro/js/jquery.fancybox.min.js" defer></script>
+<script type="rocketlazyloadscript" id="layzr-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/themes/construction-landing-page-pro/js/layzr.min.js" defer></script>
+<script type="rocketlazyloadscript" id="waypoint-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/themes/construction-landing-page-pro/js/waypoint.min.js" defer></script>
+<script type="rocketlazyloadscript" id="jquery-counterup-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/themes/construction-landing-page-pro/js/jquery.counterup.min.js" defer></script>
+<script type="rocketlazyloadscript" id="jquery-wow-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/themes/construction-landing-page-pro/js/wow.min.js" defer></script>
+<script id="construction-landing-page-custom-js-extra">
+var construction_landing_page_data = {"auto":"1","loop":"","control":"1","mode":"slide","speed":"400","pause":"6000","lightbox":"1","sticky":"1","header":"four","rtl":"","onepage_menu":"","slider_banner_ed":"none","portfolio_template":"","section_feat_cat":""};
+//# sourceURL=construction-landing-page-custom-js-extra
+</script>
+<script type="rocketlazyloadscript" id="construction-landing-page-custom-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/themes/construction-landing-page-pro/js/custom.min.js" defer></script>
+<script id="construction-landing-page-ajax-js-extra">
+var construction_landing_page_ajax = {"url":"https://www.loodgietersbedrijfrdl.nl/wp-admin/admin-ajax.php","startPage":"1","maxPages":"0","nextLink":"https://www.loodgietersbedrijfrdl.nl/page/2/","autoLoad":"infinite_scroll","loadmore":"Load More Posts","loading":"Loading...","nomore":"No more posts.","jet_gal":"","plugin_url":"https://www.loodgietersbedrijfrdl.nl/wp-content/plugins"};
+//# sourceURL=construction-landing-page-ajax-js-extra
+</script>
+<script type="rocketlazyloadscript" id="construction-landing-page-ajax-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/themes/construction-landing-page-pro/js/ajax.min.js" defer></script>
+<script id="newsletter-js-extra">
+var newsletter_data = {"action_url":"https://www.loodgietersbedrijfrdl.nl/wp-admin/admin-ajax.php"};
+//# sourceURL=newsletter-js-extra
+</script>
+<script type="rocketlazyloadscript" data-minify="1" id="newsletter-js" src="https://www.loodgietersbedrijfrdl.nl/wp-content/cache/min/1/wp-content/plugins/newsletter/main.js?ver=1764153149" defer></script>
+<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://www.loodgietersbedrijfrdl.nl/wp-content/plugins/wp-rocket/assets/js/lazyload/16.1/lazyload.min.js"></script><script>function lazyLoadThumb(e){var t='<img loading="lazy" data-lazy-src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"><noscript><img data-rt-lazy="https://i.ytimg.com/vi/ID/hqdefault.jpg" loading="lazy"data-object-fit="~"   alt="" width="480" height="360"></noscript>',a='<div class="play"></div>';return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.dataset.query.length?'':'&'+this.dataset.query;e.setAttribute("src",t.replace("ID",this.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.replaceChild(e,this)}document.addEventListener("DOMContentLoaded",function(){var e,t,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)e=document.createElement("div"),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query", a[t].dataset.query),e.setAttribute("data-src", a[t].dataset.src),e.innerHTML=lazyLoadThumb(a[t].dataset.id),e.onclick=lazyLoadYoutubeIframe,a[t].appendChild(e)});</script>
+</body>
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1784035246 -->
