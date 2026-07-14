@@ -25,7 +25,7 @@ c) Bedrijfsgegevens: adres/vestigingsplaats, KvK-nummer indien vermeld, geschat 
    (via "over ons", LinkedIn, KvK.nl — altijd als schatting, nooit als hard feit)
 
 STAP 4 - Sla resultaat op
-Voeg een rij toe aan concurrentie_onderzoek.csv. Commit en push de wijziging naar de repo
+Voeg een rij toe aan concurrentie_onderzoek.csv of maak deze aan als deze nog niet bestaat. Commit en push de wijziging naar de repo
 zodat de voortgang persistent is tussen loop-runs.
 
 STAP 5 - Rond af
