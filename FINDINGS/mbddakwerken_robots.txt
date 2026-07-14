@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /bsmedia-im/
+
+User-Agent: Googlebot
+Disallow: /bsmedia-im/
+Allow: /bsmedia-im/*.js
+Allow: /bsmedia-im/*.css
+Allow: .js
+Allow: .css
+
+sitemap: https://www.mbddakwerken.nl/sitemap_index.xml
