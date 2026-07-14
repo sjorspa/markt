@@ -28,6 +28,10 @@ STAP 4 - Sla resultaat op
 Voeg een rij toe aan concurrentie_onderzoek.csv of maak deze aan als deze nog niet bestaat. Commit en push de wijziging naar de repo
 zodat de voortgang persistent is tussen loop-runs.
 
-STAP 5 - Rond af
+STAP 5 - Wanneer je tijdens de sessie handige scripts gemaakt hebt, technische bevindingen wilt delen voor volgende sessies, of dingen in je environment hebt gevonden die handig zijn om te gebruiken voor een volgende sessie dan sla je deze zaken ook in de repo op. Doe dit in een aparte map met de naam FINDINGS, neem deze map aan het begin van je sessie door zodat we niet de hele tijd dubbel werk lopen te doen, je hebt alle vrijheid om dit zo te organiseren zodat het voor jouw makkelijk is!!!!
+
+
+STAP 6 - Rond af
 Korte samenvatting (max 3 zinnen): welk bedrijf toegevoegd, hoeveel kandidaten nog over,
 totaal aantal in bestand. Doe verder niets meer deze iteratie.
+
